@@ -1,0 +1,20 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Оригинальный текст</th>
+        <th scope="col">Перевод</th>
+        <th scope="col">Дата создания</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @card.each do |c| %>
+        <tr>
+          <td><%= c.original_text %></td>
+          <td><%= c.translated_text %></td>
+          <td><%= c.review_date %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
