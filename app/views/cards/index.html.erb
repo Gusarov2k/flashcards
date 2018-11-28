@@ -12,7 +12,7 @@
         <tr>
           <td><%= c.original_text %></td>
           <td><%= c.translated_text %></td>
-          <td><%= c.review_date %></td>
+          <td><%= c.review_date.to_formatted_s(:rfc822) %></td>
         </tr>
       <% end %>
     </tbody>
