@@ -1,24 +1,6 @@
 class CardsController < ApplicationController
 
   def index
-    @card = Card.all
+    @cards = Card.all
   end
-
-  # def show
-  # end
-
-  # def new
-  # end
-
-  # def create
-  # end
-
-  # def edit
-  # end
-
-  # def update
-  # end
-
-  # def destroy
-  # end
 end
