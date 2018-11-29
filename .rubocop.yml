@@ -12,8 +12,7 @@ Metrics/LineLength:
 Style/StringLiterals:
   Description: 'Checks if uses of quotes match the configured preference.'
   StyleGuide: '#consistent-string-literals'
-  Enabled: true
-  EnforcedStyle:
-    - double_quotes
-    - single_quotes
+  Enabled: false
+  EnforcedStyle: "double_quotes"
+
 
