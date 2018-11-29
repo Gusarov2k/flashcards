@@ -3,4 +3,4 @@ AllCops:
     - db/schema.rb
 
 Metrics/LineLength:
-  Max: 100
+  Max: 70
