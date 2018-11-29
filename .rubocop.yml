@@ -2,8 +2,8 @@ AllCops:
   Exclude:
     - db/schema.rb
 
-Metrics/LineLength:
+LineLength:
   Max: 40
 
-Style/StringLiterals:
+StringLiterals:
   Enabled: false
