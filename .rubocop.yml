@@ -4,7 +4,7 @@ Metrics/LineLength:
   Description: 'Limit lines to 100 characters.'
   StyleGuide: '#80-character-limits'
   Enabled: true
-  max: 100
+  Max: 100
 
 Metrics/MethodLength:
   Description: 'Avoid methods longer than 10 lines of code.'
@@ -21,5 +21,6 @@ Style/StringLiterals:
   Description: 'Checks if uses of quotes match the configured preference.'
   StyleGuide: '#consistent-string-literals'
   Enabled: true
-  EnforcedStyle: "double_quotes"
+  EnforcedStyle: single_quotes, double_quotes
+
 
