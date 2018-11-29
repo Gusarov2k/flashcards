@@ -14,5 +14,4 @@ Style/StringLiterals:
   StyleGuide: '#consistent-string-literals'
   Enabled: true
   EnforcedStyle:  "double_quotes"
-  EnforcedStyle: "single_quotes"
 
