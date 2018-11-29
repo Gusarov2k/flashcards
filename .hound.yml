@@ -1,4 +1,4 @@
 rubocop:
   config_file: .rubocop.yml
-  enabled: false
+  enabled: true
 
