@@ -3,7 +3,7 @@ AllCops:
     - db/schema.rb
 
 Metrics/LineLength:
-  Max: 70
+  Max: 40
 
 Style/StringLiterals:
-  Enabled: true
+  Enabled: false
