@@ -1,6 +1,5 @@
-AllCops:
-  Exclude:
-    - db/schema.rb
+inherit_from:
+- .rubocop_hound.yml
 
 LineLength:
   Max: 40
