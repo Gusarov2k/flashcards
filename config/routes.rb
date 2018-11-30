@@ -2,5 +2,5 @@ Rails.application.routes.draw do
 
   resources :cards
 
-  root "flash_cards#index"
+  root 'flash_cards#index'
 end
