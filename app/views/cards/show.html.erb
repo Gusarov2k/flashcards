@@ -1,0 +1,22 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Оригинальный текст</th>
+        <th scope="col">Перевод</th>
+        <th scope="col">Дата обзора</th>
+        <th scope="col">Редактировать</th>
+        <th scope="col">Домой</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><%= @card.original_text %></td>
+          <td><%= @card.translated_text %></td>
+          <td><%= @card.review_date %></td>
+          <td><%= link_to 'Редактировать', edit_card_path %></td>
+          <td><%= link_to 'Назад', cards_path %></td>
+        </tr>
+    </tbody>
+  </table>
+</div>

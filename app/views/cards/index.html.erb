@@ -5,6 +5,8 @@
         <th scope="col">Оригинальный текст</th>
         <th scope="col">Перевод</th>
         <th scope="col">Дата обзора</th>
+        <th scope="col">Редактировать</th>
+        <th scope="col">Удалить</th>
       </tr>
     </thead>
     <tbody>
@@ -13,6 +15,8 @@
           <td><%= c.original_text %></td>
           <td><%= c.translated_text %></td>
           <td><%= c.review_date.to_formatted_s(:rfc822) %></td>
+          <td><%= link_to 'Редактировать', edit_card_path(c) %></td>
+          <td><%= link_to 'Удалить', c, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     </tbody>
