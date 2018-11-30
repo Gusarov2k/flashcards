@@ -1,4 +1,3 @@
-# class test for Hound ci
 class CreateCards < ActiveRecord::Migration
   def change
     create_table :cards do |t|
