@@ -1,6 +1,5 @@
 class Card < ActiveRecord::Base
   validates :original_text, :translated_text, presence: true
-
   validate :change_string
 
   before_create :create_date
@@ -9,7 +8,7 @@ class Card < ActiveRecord::Base
   private
 
   def change_string
-    if original_text == translated_text
+    if original_text.casecmp? translated_text
       errors.add(:original_text, 'Оригинальный текст не может быть равен переведенному')
     end
   end
