@@ -2,8 +2,6 @@
   <%= f.error_notification %>
   <%= f.input :original_text, label: 'Оригинальный текст' %>
   <%= f.input :translated_text, label: 'Перевод текста' %>
-  <%= f.input :review_date, label: 'Дата публикации', start_year: Date.today.year - 10,
-    end_year: Date.today.year, order: [:day, :month, :year] %>
-  <%= f.button :submit, "Создать", class: "btn-primary" %>
-  <%= f.button :button, "Сброс", type: "reset", class: "btn-outline-secondary" %>
+  <%= f.button :submit, "Create", class: "btn-primary" %>
+  <%= f.button :button, "Clear", type: "reset", class: "btn-outline-secondary" %>
 <% end %>
