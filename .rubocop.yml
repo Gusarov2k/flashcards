@@ -1,6 +1,8 @@
 AllCops:
   Exclude:
     - 'db/schema.rb'
+    # - 'config/initializers/simple_form_bootstrap.rb'
+    # - 'config/initializers/simple_form.rb'
 #################### Metrics ###############################
 
 Metrics/LineLength:
@@ -8,6 +10,12 @@ Metrics/LineLength:
   StyleGuide: '#80-character-limits'
   Enabled: true
   Max: 120
+
+Metrics/BlockLength:
+  Description: 'Avoid long blocks with many lines.'
+  Enabled: true
+  Exclude:
+    - 'config/initializers/simple_form_bootstrap.rb'
 
 #################### Style ###############################
 
@@ -30,5 +38,20 @@ Style/FrozenStringLiteralComment:
                  Add the frozen_string_literal comment to the top of files
                  to help transition from Ruby 2.3.0 to Ruby 3.0.
   Enabled: false
+
+
+Style/ClassAndModuleChildren:
+  Description: 'Checks style of children classes and modules.'
+  StyleGuide: '#namespace-definition'
+  # Moving from compact to nested children requires knowledge of whether the
+  # outer parent is a module or a class. Moving from nested to compact requires
+  # verification that the outer parent is defined elsewhere. Rubocop does not
+  # have the knowledge to perform either operation safely and thus requires
+  # manual oversight.
+  AutoCorrect: false
+  Enabled: true
+  Exclude:
+    - 'test/test_helper.rb'
+
 
 

@@ -4,13 +4,12 @@ class Card < ActiveRecord::Base
 
   before_create :create_date
 
-
   private
 
   def change_string
-    if original_text.casecmp? translated_text
-      errors.add(:original_text, 'Оригинальный текст не может быть равен переведенному')
-    end
+    return unless original_text.casecmp? translated_text
+
+    errors.add(:original_text, "Original text can't be translated")
   end
 
   def create_date
