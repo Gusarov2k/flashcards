@@ -1,8 +1,6 @@
 AllCops:
   Exclude:
     - 'db/schema.rb'
-    # - 'config/initializers/simple_form_bootstrap.rb'
-    # - 'config/initializers/simple_form.rb'
 #################### Metrics ###############################
 
 Metrics/LineLength:
@@ -52,6 +50,5 @@ Style/ClassAndModuleChildren:
   Enabled: true
   Exclude:
     - 'test/test_helper.rb'
-
 
 
