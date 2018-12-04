@@ -9,7 +9,6 @@
 # ! /usr/bin/env ruby
 require 'nokogiri'
 require 'open-uri'
-require 'json'
 # require 'openssl'
 # OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 # Fetch and parse HTML document
