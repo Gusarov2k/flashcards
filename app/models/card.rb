@@ -4,6 +4,8 @@ class Card < ActiveRecord::Base
 
   before_create :create_date
 
+  include Parser
+
   private
 
   def change_string
