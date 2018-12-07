@@ -1,6 +1,6 @@
 class FlashCardsController < ApplicationController
   def index
-    @cards = Card.all.third_days_ago.sample(1)
+    @cards = Card.all.third_days_ago
   end
 
   def update; end

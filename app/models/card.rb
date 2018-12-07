@@ -6,7 +6,6 @@ class Card < ActiveRecord::Base
 
   scope :third_days_ago, -> { where("review_date <= ?", 3.days.ago) }
 
-  # https://stackoverflow.com/questions/7733085/rails-what-exactly-does-hidden-field-and-hidden-field-tag-do
   private
 
   def change_string
