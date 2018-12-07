@@ -5,6 +5,10 @@ class FlashCardsController < ApplicationController
 
   def update; end
 
+  def create
+
+  end
+
   private
 
   def flash_cards_params
