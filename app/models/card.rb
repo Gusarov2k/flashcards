@@ -2,8 +2,11 @@ class Card < ActiveRecord::Base
   validates :original_text, :translated_text, presence: true
   validate :change_string
 
-  before_create :create_date
+  # before_create :create_date
 
+  scope :third_days_ago, -> { where("review_date <= ?", 3.days.ago) }
+
+  # https://stackoverflow.com/questions/7733085/rails-what-exactly-does-hidden-field-and-hidden-field-tag-do
   private
 
   def change_string
