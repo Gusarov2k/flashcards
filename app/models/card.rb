@@ -2,9 +2,7 @@ class Card < ActiveRecord::Base
   validates :original_text, :translated_text, presence: true
   validate :change_string
 
-  # before_create :create_date
-
-  scope :third_days_ago, -> { where("review_date <= ?", 3.days.ago) }
+  before_create :create_date
 
   private
 
