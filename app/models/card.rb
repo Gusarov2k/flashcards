@@ -4,6 +4,8 @@ class Card < ActiveRecord::Base
 
   before_create :create_date
 
+  scope :third_days_ago, -> { where("review_date <= ?", 3.days.ago) }
+
   private
 
   def change_string
