@@ -11,7 +11,6 @@ class FlashCardsController < ApplicationController
     else
       render 'yt df'
     end
-
   end
 
   private
