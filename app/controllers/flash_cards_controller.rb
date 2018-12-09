@@ -4,12 +4,10 @@ class FlashCardsController < ApplicationController
     @user_value = UserValidate.new
   end
 
-  def update; end
-
   def create
     @user_value = UserValidate.new(user_validate_params)
 
-    if @user_value
+    if @user_value.check_word
       redirect_to cards_path
     else
       flash.now[:error] = "Can't connect..."

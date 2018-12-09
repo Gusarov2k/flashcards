@@ -11,6 +11,12 @@ class UserValidate
     end
   end
 
+  def check_word
+    return unless original_text.casecmp? user_text
+
+    errors.add(:user_text, "Original text can't be translated")
+  end
+
   def persisted?
     false
   end
