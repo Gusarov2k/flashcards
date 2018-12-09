@@ -5,9 +5,9 @@ class UserValidate
 
   validates :user_text, presence: true
 
-  def initialize(attributes = {})
-    attributes.each do |name, value|
-      send("#{name}=", value)
+  def initialize(params = {})
+    params&.each do |attr, value|
+      public_send("#{attr}=", value)
     end
   end
 

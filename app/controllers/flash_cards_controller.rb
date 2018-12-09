@@ -7,9 +7,9 @@ class FlashCardsController < ApplicationController
   def update; end
 
   def create
-    @user_value = UserValidate.new(flash_cards_params_user)
+    @user_value = UserValidate.new(user_validate_params)
 
-    if @user_value.valid?
+    if @user_value
       redirect_to cards_path
     else
       flash.now[:error] = "Can't connect..."
@@ -18,7 +18,7 @@ class FlashCardsController < ApplicationController
 
   private
 
-  def flash_cards_params_user
+  def user_validate_params
     params.require(:user_validate).permit(:user_text, :original_text)
   end
 end
