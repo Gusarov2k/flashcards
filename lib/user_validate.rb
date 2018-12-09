@@ -1,9 +1,7 @@
 class UserValidate
-  include ActiveModel::Validations
-  include ActiveModel::Conversion
-  extend ActiveModel::Naming
+  include ActiveModel::Model
 
-  attr_accessor :user_text
+  attr_accessor :user_text, :original_text
 
   validates :user_text, presence: true
 
