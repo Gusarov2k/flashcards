@@ -1,17 +1,9 @@
 class FlashCardsController < ApplicationController
   def index
-    @cards = Card.all.third_days_ago.sample(1)
-    @user_value = UserValidate.new
+    @card = Card.all.third_days_ago.sample(1)
   end
 
   def create
-    @user_value = UserValidate.new(user_validate_params)
-
-    if @user_value.check_word
-      redirect_to cards_path
-    else
-      flash.now[:error] = "Can't connect..."
-    end
   end
 
   private
