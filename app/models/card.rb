@@ -1,5 +1,8 @@
 class Card < ActiveRecord::Base
-  validates :original_text, :translated_text, presence: true
+
+  attr_accessor :user_text
+
+  validates :original_text, :translated_text, :user_text, presence: true
   validate :change_string
 
   # before_create :create_date

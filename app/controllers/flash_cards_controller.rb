@@ -1,6 +1,6 @@
 class FlashCardsController < ApplicationController
   def index
-    @cards = Card.all.third_days_ago
+    @card = Card.all.third_days_ago.sample(1)
   end
 
   def update; end
@@ -8,6 +8,6 @@ class FlashCardsController < ApplicationController
   private
 
   def flash_cards_params
-    params.require(:card).permit(:translated_text)
+    params.require(:card).permit(:translated_text, :user_text)
   end
 end
