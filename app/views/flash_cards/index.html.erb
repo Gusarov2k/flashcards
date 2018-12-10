@@ -2,10 +2,10 @@
   <p class="lead">
     Первый в мире  удобный менеджер флеш-карточек. Именно так.
   </p>
-
   <%= simple_form_for(@card, url: "flash_cards#create", html: { class: 'form-group' }) do |f| %>
+  <%= simple_form_for(@user_value, url: '/', html: { class: 'form-group' }) do |f| %>
     <%= f.error_notification %>
-     <%= f.input :original_text, as: 'hidden',  input_html: { value: "#{@cards[0].original_text}"} %>
+     <%= f.input :original_text, as: 'hidden', input_html: { value: "#{@cards[0].original_text}"} %>
     <%= f.input :translated_text, label: 'Переведненный вариант', readonly: true, input_html: { value: "#{@cards[0].translated_text}"} %>
     <%= f.input :user_text, label: 'Ваш вариант оригинала' %>
     <%= f.button :submit, class: "btn-primary" %>

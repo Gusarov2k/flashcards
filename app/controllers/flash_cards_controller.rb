@@ -4,6 +4,7 @@ class FlashCardsController < ApplicationController
   end
 
   def create
+    end
   end
 
   private
