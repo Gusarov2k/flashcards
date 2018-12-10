@@ -3,7 +3,7 @@ class FlashCardsController < ApplicationController
     @cards = Card.all.third_days_ago.sample(1)
     if request.post?
       @user_value = UserValidate.new(user_validate_params)
-      redirect_to cards_path if @user_value.check_word && @user.valid?
+      redirect_to cards_path if @user_value.check_word
     else
       @user_value = UserValidate.new
     end
