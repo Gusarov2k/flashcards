@@ -9,7 +9,7 @@ class Card < ActiveRecord::Base
   scope :third_days_ago, -> { where("review_date <= ?", 3.days.ago) }
 
   def check_word(user_text)
-    original_text.eql? user_text
+    original_text.casecmp(user_text).zero?
   end
 
   def add_therd_days
