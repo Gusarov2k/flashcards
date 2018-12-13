@@ -9,7 +9,7 @@ class FlashCardsController < ApplicationController
     if @card.check_word(flash_cards_params[:user_text])
       @card.add_therd_days
       flash[:flash_message] = 'You have guessed the word!'
-      redirect_to '/'
+      redirect_to root_path
     else
       flash.now[:flash_message] = 'Your word is not equal to the original'
       render :index
@@ -23,6 +23,6 @@ class FlashCardsController < ApplicationController
   end
 
   def flash_cards_params
-    params.require(:card).permit(:translated_text, :original_text, :user_text)
+    params.require(:card).permit(:user_text)
   end
 end
