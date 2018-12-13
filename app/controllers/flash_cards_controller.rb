@@ -8,8 +8,10 @@ class FlashCardsController < ApplicationController
   def word_comparison
     if @card.check_word(flash_cards_params[:user_text])
       @card.add_therd_days
+      flash[:flash_message] = 'You have guessed the word!'
       redirect_to '/'
     else
+      flash.now[:flash_message] = 'Your word is not equal to the original'
       render :index
     end
   end

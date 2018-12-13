@@ -2,9 +2,9 @@ class Card < ActiveRecord::Base
   attr_accessor :user_text
 
   validates :original_text, :translated_text, presence: true
-  validate :change_string, unless: :translated_text?
+  validate :change_string
 
-  # before_create :create_date
+  before_create :create_date
 
   scope :third_days_ago, -> { where("review_date <= ?", 3.days.ago) }
 
@@ -20,7 +20,7 @@ class Card < ActiveRecord::Base
   private
 
   def change_string
-    return unless original_text.casecmp? translated_text
+    return unless original_text.casecmp translated_text
 
     errors.add(:original_text, "Original text can't be translated")
   end
