@@ -1,12 +1,12 @@
 class Card < ActiveRecord::Base
-  attr_accessor :user_text
+  # attr_accessor :user_text
 
   validates :original_text, :translated_text, presence: true
   validate :change_string
 
   before_create :create_date
 
-  scope :third_days_ago, -> { where("review_date <= ?", Time.now).order('RANDOM()').first }
+  scope :select_line_created_earlier, -> { where("review_date <= ?", Time.now).order('RANDOM()').first }
 
   def check_word(user_text)
     original_text.casecmp(user_text).zero?

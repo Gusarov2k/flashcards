@@ -1,5 +1,6 @@
 class CardsController < ApplicationController
-  before_action :set_card, only: %i[show edit update destroy word_comparison]
+  before_action :set_card, only: %i[show edit update destroy]
+  before_action :set_flash_card, only: %i[word_comparison]
 
   def index
     @cards = Card.all
@@ -37,7 +38,7 @@ class CardsController < ApplicationController
   end
 
   def word_comparison
-    user_word = params[:card][:user_text]
+    user_word = params[:check][:user_text]
     if @card.check_word(user_word)
       @card.add_therd_days
       flash[:flash_message] = 'You have guessed the word!'
@@ -50,11 +51,15 @@ class CardsController < ApplicationController
 
   private
 
+  def set_flash_card
+    @card = Card.find(params[:check][:id])
+  end
+
   def set_card
     @card = Card.find(params[:id])
   end
 
   def card_params
-    params.require(:card).permit(:original_text, :translated_text, :review_date, :user_text)
+    params.require(:card).permit(:original_text, :translated_text, :review_date)
   end
 end

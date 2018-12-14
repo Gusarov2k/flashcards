@@ -1,4 +1,4 @@
-<%= simple_form_for(@card, url: '/', html: { class: 'form-group' }) do |f| %>
+<%= simple_form_for(:check, method: :patch,  url: '/', html: { class: 'form-group' }) do |f| %>
   <%= f.error_notification %>
   <%= f.input :id, as: 'hidden' %>
   <%= f.input :original_text, as: 'hidden' %>
