@@ -1,4 +1,4 @@
-<%= simple_form_for(:check, method: :patch,  url: card_word_comparison_path(@card), html: { class: 'form-group' }) do |f| %>
+<%= simple_form_for(:check, method: :post,  url: card_word_comparison_path(@card), html: { class: 'form-group' }) do |f| %>
   <%= f.error_notification %>
   <%= f.input :translated_text, label: 'Переведненный вариант', readonly: true %>
   <%= f.input :user_text, label: 'Ваш вариант оригинала' %>

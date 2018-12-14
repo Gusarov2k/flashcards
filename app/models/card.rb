@@ -1,6 +1,4 @@
 class Card < ActiveRecord::Base
-  # attr_accessor :user_text
-
   validates :original_text, :translated_text, presence: true
   validate :change_string
 
