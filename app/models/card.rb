@@ -11,8 +11,8 @@ class Card < ActiveRecord::Base
   end
 
   def add_therd_days
-    a = self.review_date += 3.days
-    update(review_date: a)
+    self.review_date += 3.days
+    save
   end
 
   private
