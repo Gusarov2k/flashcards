@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :cards
+  resources :cards do
+    patch 'word_comparison'
+  end
   root 'flash_cards#index'
-  patch '/', to: 'cards#word_comparison'
 end

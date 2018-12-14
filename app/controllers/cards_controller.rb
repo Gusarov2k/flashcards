@@ -45,14 +45,14 @@ class CardsController < ApplicationController
       redirect_to root_path
     else
       flash.now[:flash_message] = 'Your word is not equal to the original'
-      render :index
+      render 'flash_cards/index'
     end
   end
 
   private
 
   def set_flash_card
-    @card = Card.find(params[:check][:id])
+    @card = Card.find(params[:card_id])
   end
 
   def set_card
