@@ -40,7 +40,7 @@ class CardsController < ApplicationController
   def word_comparison
     user_word = params[:check][:user_text]
     if @card.check_word(user_word)
-      @card.add_therd_days
+      @card.add_three_days
       flash[:flash_message] = 'You have guessed the word!'
       redirect_to root_path
     else

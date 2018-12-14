@@ -10,7 +10,7 @@ class Card < ActiveRecord::Base
     original_text.casecmp(user_text.strip.downcase).zero?
   end
 
-  def add_therd_days
+  def add_three_days
     create_date
     save
   end
