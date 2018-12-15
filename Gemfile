@@ -37,6 +37,13 @@ group :development, :test do
   gem 'byebug'
   gem 'rails-footnotes', '~> 4.0'
   gem 'rubocop', require: false
+  gem 'pry-rails'
+  gem 'rspec-rails', '~> 3.8'
+end
+
+group :test do
+  gem 'factory_bot_rails'
+  gem 'capybara'
 end
 
 group :development do
