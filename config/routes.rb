@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   resources :cards do
     member do
-      patch   'word_comparison'
-      get     'check_translate'
+      patch 'word_comparison'
     end
   end
-  root 'cards#check_translate'
+  match 'cards/random' => 'cards#random', via: :get
+  root 'cards#random'
 end

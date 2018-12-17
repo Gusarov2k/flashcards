@@ -36,7 +36,7 @@ class CardsController < ApplicationController
     redirect_to cards_path
   end
 
-  def check_translate
+  def random
     @card = Card.cards_created_earlier.random.first
   end
 
@@ -48,7 +48,7 @@ class CardsController < ApplicationController
       redirect_to root_path
     else
       flash.now[:flash_message] = 'Your word is not equal to the original'
-      render 'check_translate'
+      render 'random'
     end
   end
 
