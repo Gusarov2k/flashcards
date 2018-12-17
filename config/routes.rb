@@ -3,7 +3,9 @@ Rails.application.routes.draw do
     member do
       patch 'word_comparison'
     end
+    collection do
+      get 'random'
+    end
   end
-  match 'cards/random' => 'cards#random', via: :get
   root 'cards#random'
 end

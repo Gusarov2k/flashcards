@@ -37,12 +37,11 @@ class CardsController < ApplicationController
   end
 
   def random
-    @card = Card.cards_created_earlier.random.first
+    @card = Card.created_at_earlier.random.first
   end
 
   def word_comparison
-    user_word = params[:check][:user_text]
-    if @card.check_word(user_word)
+    if @card.check_word(params[:check][:user_text])
       @card.recheck_date
       flash[:flash_message] = 'You have guessed the word!'
       redirect_to root_path

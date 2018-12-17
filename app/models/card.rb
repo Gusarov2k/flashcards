@@ -4,7 +4,7 @@ class Card < ActiveRecord::Base
 
   before_create :recheck_date
 
-  scope :cards_created_earlier, -> { where("review_date <= ?", Time.now) }
+  scope :created_at_earlier, -> { where("review_date <= ?", Time.now) }
   scope :random, -> { order('RANDOM()') }
 
   def check_word(user_text)
