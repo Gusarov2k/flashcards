@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :cards do
-    patch 'word_comparison'
+    member do
+      patch   'word_comparison'
+      get     'check_translate'
+    end
   end
-  root 'flash_cards#index'
+  root 'cards#check_translate'
 end

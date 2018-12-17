@@ -2,17 +2,17 @@ class Card < ActiveRecord::Base
   validates :original_text, :translated_text, presence: true
   validate :change_string
 
-  before_create :create_date
+  before_create :recheck_date
 
-  scope :select_line_created_earlier, -> { where("review_date <= ?", Time.now).order('RANDOM()') }
+  scope :cards_created_earlier, -> { where("review_date <= ?", Time.now) }
+  scope :random, -> { order('RANDOM()') }
 
   def check_word(user_text)
     original_text.casecmp(user_text.strip.downcase).zero?
   end
 
-  def add_three_days
-    create_date
-    save
+  def recheck_date
+    self.review_date = (Date.today + 3.days).to_s
   end
 
   private
@@ -21,9 +21,5 @@ class Card < ActiveRecord::Base
     return unless original_text.casecmp(translated_text.strip.downcase).zero?
 
     errors.add(:original_text, "Original text can't be translated")
-  end
-
-  def create_date
-    self.review_date = (Date.today + 3.days).to_s
   end
 end
