@@ -37,7 +37,7 @@ class CardsController < ApplicationController
   end
 
   def random
-    @card = Card.created_at_earlier.random.first
+    @card = Card.ready_for_review.random.first
   end
 
   def word_comparison
