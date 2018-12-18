@@ -1,6 +1,7 @@
 class Card < ActiveRecord::Base
   validates :original_text, :translated_text, presence: true
-  validate :change_string
+  validate :clear_words, if: proc { |a| a.original_text? && a.translated_text? }
+  validate :change_string, if: proc { |a| a.original_text? && a.translated_text? }
 
   before_create :recheck_date
 
@@ -8,7 +9,7 @@ class Card < ActiveRecord::Base
   scope :random, -> { order('RANDOM()') }
 
   def check_word(user_text)
-    original_text.casecmp(user_text.strip.downcase).zero?
+    original_text.casecmp(user_text.mb_chars.strip.downcase).zero?
   end
 
   def recheck_date
@@ -17,9 +18,14 @@ class Card < ActiveRecord::Base
 
   private
 
-  def change_string
-    return unless original_text.casecmp(translated_text.strip.downcase).zero?
+  def clear_words
+    self.original_text = original_text.mb_chars.downcase.strip
+    self.translated_text = translated_text.mb_chars.downcase.strip
+  end
 
-    errors.add(:original_text, "Original text can't be translated")
+  def change_string
+    return unless original_text.casecmp(translated_text).zero?
+
+    errors.add(:original_text, 'Original text can\'t be translated')
   end
 end
