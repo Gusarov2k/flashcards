@@ -2,17 +2,23 @@ require 'rails_helper'
 
 RSpec.describe Card, type: :model do
   context 'validation tests' do
+    let(:card) { build(:card) } # Card.new({})
+    # let(:card) { create(:card) }  # Card.create({})
+    it 'all content blank' do
+      card.valid?
+      expect(card.errors.full_messages).to include('Original text can\'t be blank')
+    end
     it 'ensures original_text presence' do
-      card = Card.new(translated_text: 'First').save
-      expect(card).to eq(false)
+      card.original_text = nil
+      expect(card.errors.full_messages).to include('text can\'t be blank')
     end
 
     it 'ensures translated_text presence' do
-      card = Card.new(original_text: 'Last').save
+      card.translated_text = nil
       expect(card).to eq(false)
     end
 
-    it 'should save successfully' do
+    it 'saves successfully' do
       card = Card.new(original_text: 'First', translated_text: 'Last').save
       expect(card).to eq(true)
     end

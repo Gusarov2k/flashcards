@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.feature "Cards", type: :feature do
+RSpec.describe "Cards", type: :feature do
   context 'create new card' do
-    scenario 'should be successful' do
+    it 'is successful' do
       visit new_card_path
       within('form') do
         fill_in 'Оригинальный текст', with: 'ace'
@@ -12,7 +12,7 @@ RSpec.feature "Cards", type: :feature do
       expect(page).to have_content('Перевод')
     end
 
-    scenario 'should fail' do
+    it 'fails' do
       visit new_card_path
       within('form') do
         fill_in 'Оригинальный текст', with: 'ace'
@@ -25,10 +25,12 @@ RSpec.feature "Cards", type: :feature do
 
   context 'update card' do
     let!(:card) { Card.create(original_text: 'word', translated_text: 'other') }
-    before(:each) do
+
+    before do
       visit edit_card_path(card)
     end
-    scenario 'should be successful' do
+
+    it 'is successful' do
       within('form') do
         fill_in 'Оригинальный текст', with: 'gnom'
         fill_in 'Перевод текста', with: 'guru'
@@ -37,22 +39,20 @@ RSpec.feature "Cards", type: :feature do
       expect(page).to have_content('guru')
     end
 
-    scenario 'should fail' do
+    it 'fails' do
       within('form') do
         fill_in 'Оригинальный текст', with: ''
       end
       click_button 'Create'
       expect(page).to have_content('be blank')
     end
-
   end
 
   context 'destroy card' do
-    scenario 'should be successful' do
+    it 'is successful' do
       card = Card.create(original_text: 'word', translated_text: 'other')
       visit cards_path
-      expect {click_link 'Delete'}.to change(Card, :count).by(-1)
+      expect { click_link 'Delete' }.to change(Card, :count).by(-1)
     end
   end
-
 end
