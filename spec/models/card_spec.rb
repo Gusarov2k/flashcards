@@ -2,8 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Card, type: :model do
   context 'validation tests' do
-    let(:card) { build(:card) } # Card.new({})
-    # let(:card) { create(:card) }  # Card.create({})
+    let(:card) { build(:card) }
     it 'all content blank' do
       card.valid?
       expect(card.errors.full_messages).to include('Original text can\'t be blank')

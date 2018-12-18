@@ -50,7 +50,7 @@ RSpec.describe "Cards", type: :feature do
 
   context 'destroy card' do
     it 'is successful' do
-      card = Card.create(original_text: 'word', translated_text: 'other')
+      let(:card) { Card.create(original_text: 'word', translated_text: 'other') }
       visit cards_path
       expect { click_link 'Delete' }.to change(Card, :count).by(-1)
     end
