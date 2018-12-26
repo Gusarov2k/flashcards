@@ -1,7 +1,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  
+
   pool: 5
 
 development:
@@ -10,5 +10,5 @@ development:
 
 test:
   <<: *default
-  database: flashcards_test
+  database: travis_ci_test
 
