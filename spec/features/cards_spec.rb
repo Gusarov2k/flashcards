@@ -84,7 +84,7 @@ RSpec.describe 'Cards', type: :feature do
         card.original_text = 'word'
         card.translated_text = 'other'
         visit cards_path
-        expect { click_link 'Delete' }.to change(Card, :count).by(-1)
+        expect { click_link 'Delete', href: "/cards/#{card.id}" }.to change(Card, :count).by(-1)
       end
     end
   end
