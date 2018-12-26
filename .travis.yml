@@ -6,6 +6,3 @@ env:
 script:
   - RAILS_ENV=test bundle exec rake db:create db:migrate --trace
   - bundle exec rspec spec/
-before_script:
-  - cp config/database.travis.yml config/database.yml
-bundler_args: --binstubs=./bundler_stubs
