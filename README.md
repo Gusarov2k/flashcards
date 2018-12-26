@@ -1,6 +1,8 @@
 == README
 [![Build Status](https://travis-ci.com/Gusarov2k/flashcards.svg?branch=master)](https://travis-ci.com/Gusarov2k/flashcards)
 
+[![Build Status](https://travis-ci.org/Gusarov2k/flashcards.svg?branch=Task_7)](https://travis-ci.org/Gusarov2k/flashcards)
+
 This README would normally document whatever steps are necessary to get the
 application up and running it.
 
