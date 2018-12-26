@@ -1,7 +1,11 @@
 ﻿<section pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center>
-  <p class="lead">
-    Первый в мире  удобный менеджер флеш-карточек. Именно так.
-  </p>
-  <p class="Message"><%= flash[:flash_message] %></p>
-  <%= render 'form_random' %>
+  <% if @card %>
+    <p class="lead">
+      Первый в мире  удобный менеджер флеш-карточек. Именно так.
+    </p>
+    <p class="Message"><%= flash[:flash_message] %></p>
+    <%= render 'form_random' %>
+  <% else %>
+    <p class="lead"> Сейчас нет карточек для проверки, загляните позже. </p>
+  <% end %>
 </section>

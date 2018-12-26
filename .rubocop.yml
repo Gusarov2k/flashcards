@@ -1,7 +1,15 @@
+require: rubocop-rspec
 AllCops:
   Exclude:
     - 'db/schema.rb'
+  RSpec:
+    Patterns:
+    - '_test.rb$'
+    - '_spec.rb$'
 #################### Metrics ###############################
+Metrics/ModuleLength:
+  Exclude:
+    - '**/*_spec.rb'
 
 Metrics/LineLength:
   Description: 'Limit lines to 100 characters.'
@@ -14,6 +22,7 @@ Metrics/BlockLength:
   Enabled: true
   Exclude:
     - 'config/initializers/simple_form_bootstrap.rb'
+    - '**/*_spec.rb'
 
 #################### Style ###############################
 
@@ -50,5 +59,8 @@ Style/ClassAndModuleChildren:
   Enabled: true
   Exclude:
     - 'test/test_helper.rb'
+
+RSpec/ExampleLength:
+  Max: 19
 
 
