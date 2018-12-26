@@ -1,10 +1,10 @@
 language: ruby
 rvm:
   - 2.2
-  branches:
-    only:
-      - master
-      - Task_7
+branches:
+  only:
+    - master
+    - Task_7
 services:
   - postgresql
 
