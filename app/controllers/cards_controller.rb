@@ -2,7 +2,7 @@ class CardsController < ApplicationController
   before_action :set_card, only: %i[show edit update destroy word_comparison]
 
   def index
-    @cards = Card.all
+    @cards = current_user.cards
   end
 
   def show; end
@@ -37,7 +37,7 @@ class CardsController < ApplicationController
   end
 
   def random
-    @card = Card.ready_for_review.random.first
+    @card = current_user.cards.ready_for_review.random.first
   end
 
   def word_comparison
@@ -58,6 +58,6 @@ class CardsController < ApplicationController
   end
 
   def card_params
-    params.require(:card).permit(:original_text, :translated_text, :review_date)
+    params.require(:card).permit(:original_text, :translated_text, :review_date, :user_id)
   end
 end
