@@ -24,6 +24,11 @@ Metrics/BlockLength:
     - 'config/initializers/simple_form_bootstrap.rb'
     - '**/*_spec.rb'
 
+Metrics/AbcSize:
+  Max: 32
+
+Metrics/MethodLength:
+  Max: 25
 #################### Style ###############################
 
 
