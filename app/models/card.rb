@@ -1,4 +1,6 @@
 class Card < ActiveRecord::Base
+  belongs_to :user
+
   validates :original_text, :translated_text, presence: true
   validate :clear_words, if: proc { |a| a.original_text? && a.translated_text? }
   validate :change_string, if: proc { |a| a.original_text? && a.translated_text? }

@@ -3,6 +3,10 @@ require 'rails_helper'
 RSpec.describe Card, type: :model do
   let(:card) { build(:card) }
 
+  describe 'associations' do
+    it { is_expected.to belong_to(:user) }
+  end
+
   describe 'validations' do
     context 'when card valid' do
       it { expect(card).to be_valid }
