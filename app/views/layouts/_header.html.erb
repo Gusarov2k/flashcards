@@ -4,4 +4,22 @@
     <%= link_to "Все карточки", cards_path, class: "p-2 text-dark" %>
     <%= link_to "Добавить карточку", new_card_path, class: "p-2 text-dark"  %>
   </div>
+  <div id="navbar">
+  <ul class="nav navbar-nav">
+    <% if current_user %>
+      <li><%= link_to 'Show user', user_path(current_user) %></li>
+    <% else %>
+      <li><%= link_to 'Sign Up', sign_up_path %></li>
+      <li><%= link_to 'Log In', log_in_path %></li>
+      <li><%= link_to 'Login github', auth_at_provider_path(provider: :github) %></li>
+      <li><%= link_to 'Login vk', auth_at_provider_path(provider: :vk) %></li>
+    <% end %>
+  </ul>
+  <% if current_user %>
+    <ul class="nav navbar-nav pull-right">
+      <li><span><%= current_user.name %></span></li>
+      <li><%= link_to 'Log Out', log_out_path, method: :delete %></li>
+    </ul>
+  <% end %>
+</div>
 </header>

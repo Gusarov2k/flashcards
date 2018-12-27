@@ -5,6 +5,10 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'spec_helper'
 require 'support/factory_bot'
+require 'database_cleaner'
+require 'capybara/mechanize'
+
+DatabaseCleaner.strategy = :truncation
 
 begin
   ActiveRecord::Migration.maintain_test_schema!

@@ -16,3 +16,6 @@
 !/log/.keep
 /tmp
 coverage
+
+# Add env in git ignore
+# .env
