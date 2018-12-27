@@ -1,5 +1,15 @@
 class UsersController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
+  before_action :user_id, only: [:show, :edit, :update, :destroy]
+
+  def index
+    @users = User.all
+  end
+
+  def show
+    @user = User.find(params[:id])
+  end
+
   def new
     @user = User.new
   end
@@ -15,7 +25,24 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    if @user.update(user_params)
+      redirect_to(@user, notice: 'User was successfully updated.')
+    else
+      render action: 'edit'
+    end
+  end
+
+  def destroy
+    @user.destroy
+    redirect_to users_path
+  end
+
   private
+
+  def user_id
+    @user = User.find(params[:id])
+  end
 
   def user_params
     params.require(:user).permit(:email, :password, :name)
