@@ -1,7 +1,8 @@
-<%= simple_form_for(@card, html: { class: 'form-group' }) do |f| %>
+<%= simple_form_for( @card, html: { class: 'form-group' }) do |f| %>
   <%= f.error_notification %>
   <%= f.input :original_text, label: 'Оригинальный текст' %>
   <%= f.input :translated_text, label: 'Перевод текста' %>
+  <%= f.input :user_id, as: :hidden, input_html: {value: "#{current_user.id}"} %>
   <%= f.button :submit, "Create", class: "btn-primary" %>
   <%= f.button :button, "Clear", type: "reset", class: "btn-outline-secondary" %>
 <% end %>

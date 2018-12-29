@@ -8,6 +8,7 @@ class CardsController < ApplicationController
   def show; end
 
   def new
+    @user = @current_user
     @card = Card.new
   end
 
@@ -58,6 +59,6 @@ class CardsController < ApplicationController
   end
 
   def card_params
-    params.require(:card).permit(:original_text, :translated_text, :review_date)
+    params.require(:card).permit(:original_text, :translated_text, :review_date, :user_id)
   end
 end

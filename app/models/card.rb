@@ -1,5 +1,5 @@
 class Card < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, dependent: :destroy
 
   validates :original_text, :translated_text, presence: true
   validate :clear_words, if: proc { |a| a.original_text? && a.translated_text? }
