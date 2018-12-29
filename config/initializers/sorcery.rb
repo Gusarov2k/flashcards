@@ -2,7 +2,7 @@
 # The default is nothing which will include only core features (password encryption, login/logout).
 # Available submodules are: :user_activation, :http_basic_auth, :remember_me,
 # :reset_password, :session_timeout, :brute_force_protection, :activity_logging, :external
-Rails.application.config.sorcery.submodules = [:core, :remember_me, :external]
+Rails.application.config.sorcery.submodules = %i[core remember_me external]
 
 # Here you can configure each submodule's features.
 Rails.application.config.sorcery.configure do |config|
@@ -74,7 +74,8 @@ Rails.application.config.sorcery.configure do |config|
   # config.register_last_activity_time =
 
   # -- external --
-  # What providers are supported by this app, i.e. [:twitter, :facebook, :github, :linkedin, :xing, :google, :liveid, :salesforce, :slack] .
+  # What providers are supported by this app, i.e.
+  # [:twitter, :facebook, :github, :linkedin, :xing, :google, :liveid, :salesforce, :slack] .
   # Default: `[]`
   #
   # config.external_providers =
@@ -128,7 +129,12 @@ Rails.application.config.sorcery.configure do |config|
   # config.instagram.secret = ""
   # config.instagram.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=instagram"
   # config.instagram.user_info_mapping = {:email => "username"}
-  # config.instagram.access_permissions = ["basic", "public_content", "follower_list", "comments", "relationships", "likes"]
+  # config.instagram.access_permissions = [ "basic",
+  #                                           "public_content",
+  #                                           "follower_list",
+  #                                           "comments",
+  #                                           "relationships",
+  #                                           "likes"]
   #
   # config.github.key = ""
   # config.github.secret = ""
@@ -384,7 +390,7 @@ Rails.application.config.sorcery.configure do |config|
     # Default: `5 * 60`
     #
     # user.reset_password_time_between_emails =
-    
+
     # access counter to a reset password page attribute name
     # Default: `:access_count_to_reset_password_page`
     #
@@ -396,30 +402,25 @@ Rails.application.config.sorcery.configure do |config|
     #
     # user.magic_login_token_attribute_name =
 
-
     # expires at attribute name.
     # Default: `:magic_login_token_expires_at`
     #
     # user.magic_login_token_expires_at_attribute_name =
-
 
     # when was email sent, used for hammering protection.
     # Default: `:magic_login_email_sent_at`
     #
     # user.magic_login_email_sent_at_attribute_name =
 
-
     # mailer class. Needed.
     # Default: `nil`
     #
     # user.magic_login_mailer_class =
 
-
     # magic login email method on your mailer class.
     # Default: `:magic_login_email`
     #
     # user.magic_login_email_method_name =
-
 
     # when true sorcery will not automatically
     # email magic login details and allow you to
@@ -428,12 +429,10 @@ Rails.application.config.sorcery.configure do |config|
     #
     # user.magic_login_mailer_disabled =
 
-
     # how many seconds before the request expires. nil for never expires.
     # Default: `nil`
     #
     # user.magic_login_expiration_period =
-
 
     # hammering protection, how long in seconds to wait before allowing another email to be sent.
     # Default: `5 * 60`

@@ -1,14 +1,8 @@
 class UsersController < ApplicationController
-  skip_before_action :require_login, only: [:new, :create]
-  before_action :user_id, only: [:show, :edit, :update, :destroy]
+  skip_before_action :require_login, only: %i[new create]
+  before_action :user_id, only: %i[show edit update]
 
-  def index
-    @users = User.all
-  end
-
-  def show
-    @user = User.find(params[:id])
-  end
+  def show; end
 
   def new
     @user = User.new
@@ -33,11 +27,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy
-    @user.destroy
-    redirect_to users_path
-  end
-
   private
 
   def user_id
@@ -45,6 +34,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :name)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 end
