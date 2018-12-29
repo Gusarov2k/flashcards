@@ -8,7 +8,6 @@ class CardsController < ApplicationController
   def show; end
 
   def new
-    @user = @current_user
     @card = Card.new
   end
 
