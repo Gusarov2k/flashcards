@@ -6,8 +6,6 @@ require 'capybara/rails'
 require 'spec_helper'
 require 'support/factory_bot'
 
-include Sorcery::TestHelpers
-
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e

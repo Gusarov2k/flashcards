@@ -88,11 +88,10 @@ RSpec.describe 'Cards', type: :feature do
   describe 'destroy card' do
     context 'when successful' do
       let(:card) { create(:card, :user) }
+
       it 'delete card' do
         card.original_text = 'word'
         card.translated_text = 'other'
-        visit cards_path
-        save_and_open_page
         expect { click_link 'Delete', href: "/cards/#{card.id}" }.to change(Card, :count).by(-1)
       end
     end
@@ -123,7 +122,7 @@ RSpec.describe 'Cards', type: :feature do
   end
 
   describe '#word_comparison' do
-    let(:card) { create(:card, :user) }
+    let(:card) { create(:card) }
 
     before do
       card.update(review_date: ((Date.current - 1.day)).to_s)

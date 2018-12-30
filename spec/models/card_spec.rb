@@ -4,7 +4,6 @@ RSpec.describe Card, type: :model do
   let(:card) { build(:card) }
 
   describe 'associations' do
-
     it { is_expected.to belong_to(:user) }
   end
 
