@@ -1,6 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe 'Cards', type: :feature do
+  let(:user) { create(:user) }
+
+  before do
+    visit log_in_url
+    fill_in 'Email',    with: user.email
+    fill_in 'Password', with: 'secret'
+    click_button 'Log In'
+  end
+
   describe 'card creation' do
     context 'when successful' do
       it 'create card' do

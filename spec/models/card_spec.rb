@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Card, type: :model do
+  before do
+    build(:user)
+    login_user('whatever@whatever.com', 'secret')
+  end
+
   let(:card) { build(:card) }
 
   describe 'associations' do
