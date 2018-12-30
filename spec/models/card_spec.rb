@@ -1,11 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Card, type: :model do
-   before(:each) do
-    @user = create(:user)
-    login_user
-  end
-
   let(:card) { build(:card) }
 
   describe 'associations' do
