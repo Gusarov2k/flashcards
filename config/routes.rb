@@ -15,4 +15,10 @@ Rails.application.routes.draw do
   resources :sessions, only: %i[new create destroy]
   get '/log_in', to: 'sessions#new', as: :log_in
   delete '/log_out', to: 'sessions#destroy', as: :log_out
+
+  resource :oauth do
+    get :callback, on: :collection
+  end
+
+  get 'oauth/:provider' => 'oauths#oauth', as: :auth_at_provider
 end

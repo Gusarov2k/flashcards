@@ -136,49 +136,20 @@ Rails.application.config.sorcery.configure do |config|
   #                                           "relationships",
   #                                           "likes"]
   #
-  # config.github.key = ""
-  # config.github.secret = ""
-  # config.github.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=github"
-  # config.github.user_info_mapping = {:email => "name"}
-  # config.github.scope = ""
-  #
-  # config.paypal.key = ""
-  # config.paypal.secret = ""
-  # config.paypal.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=paypal"
-  # config.paypal.user_info_mapping = {:email => "email"}
-  #
-  # config.wechat.key = ""
-  # config.wechat.secret = ""
-  # config.wechat.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=wechat"
-  #
-  # For Auth0, site is required and should match the domain provided by Auth0.
-  #
-  # config.auth0.key = ""
-  # config.auth0.secret = ""
-  # config.auth0.callback_url = "https://0.0.0.0:3000/oauth/callback?provider=auth0"
-  # config.auth0.site = "https://example.auth0.com"
-  #
-  # config.google.key = ""
-  # config.google.secret = ""
-  # config.google.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=google"
-  # config.google.user_info_mapping = {:email => "email", :username => "name"}
-  # config.google.scope = "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
-  #
-  # For Microsoft Graph, the key will be your App ID, and the secret will be your app password/public key.
-  # The callback URL "can't contain a query string or invalid special characters", see: https://docs.microsoft.com/en-us/azure/active-directory/active-directory-v2-limitations#restrictions-on-redirect-uris
-  # More information at https://graph.microsoft.io/en-us/docs
-  #
-  # config.microsoft.key = ""
-  # config.microsoft.secret = ""
-  # config.microsoft.callback_url = "http://0.0.0.0:3000/oauth/callback/microsoft"
-  # config.microsoft.user_info_mapping = {:email => "userPrincipalName", :username => "displayName"}
-  # config.microsoft.scope = "openid email https://graph.microsoft.com/User.Read"
-  #
-  # config.vk.key = ""
-  # config.vk.secret = ""
-  # config.vk.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=vk"
-  # config.vk.user_info_mapping = {:login => "domain", :name => "full_name"}
-  # config.vk.api_version = "5.71"
+
+  config.external_providers = %i[vk github]
+
+  config.github.key = "73dd312ccb4296f90875"
+  config.github.secret = "c2f0fd93de10471ed6b4f3e9ee904984eebc0089"
+  config.github.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=github"
+  config.github.user_info_mapping = { email: "name" }
+  config.github.scope = ""
+
+  config.vk.key = "4Dz6AjOWMk15MP65jQLT"
+  config.vk.secret = "95875ef795875ef795875ef74295e09b819958795875ef7c9a1123c6e23ba59df864674"
+  config.vk.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=vk"
+  config.vk.user_info_mapping = { login: "domain", name: "full_name" }
+  config.vk.api_version = "5.71"
   #
   # config.slack.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=slack"
   # config.slack.key = ''
@@ -224,7 +195,7 @@ Rails.application.config.sorcery.configure do |config|
     # specify username attributes, for example: [:username, :email].
     # Default: `[:email]`
     #
-    # user.username_attribute_names =
+    user.username_attribute_names = [:id]
 
     # change *virtual* password attribute, the one which is used until an encrypted one is generated.
     # Default: `:password`
@@ -506,7 +477,7 @@ Rails.application.config.sorcery.configure do |config|
     # Class which holds the various external provider data for this user.
     # Default: `nil`
     #
-    # user.authentications_class =
+    user.authentications_class = Authentication
 
     # User's identifier in authentications class.
     # Default: `:user_id`
