@@ -145,8 +145,8 @@ Rails.application.config.sorcery.configure do |config|
   config.github.user_info_mapping = { email: "name" }
   config.github.scope = ""
 
-  config.vk.key = "6LFzoRym6RkQjOlwdOqV"
-  config.vk.secret = "a8be0a8ba8be0a8ba8be0a8b87a8d9de4baa8bea8be0a8bf492b91ad648fe743ffc689c"
+  config.vk.key = "6804672"
+  config.vk.secret = "6LFzoRym6RkQjOlwdOqV"
   config.vk.callback_url = "http://0.0.0.0:3000/oauth/callback?provider=vk"
   config.vk.user_info_mapping = { login: "domain", name: "full_name" }
   config.vk.api_version = "5.71"
