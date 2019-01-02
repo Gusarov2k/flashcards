@@ -2,7 +2,7 @@ class CardsController < ApplicationController
   before_action :set_card, only: %i[show edit update destroy word_comparison]
 
   def index
-    @cards = Card.all.where(user_id: @current_user.id)
+    @cards = Card.all
   end
 
   def show; end
