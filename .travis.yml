@@ -5,6 +5,7 @@ env:
   - DB=postgresql
 before_install:
   - "echo 'gem: --no-ri --no-rdoc' > ~/.gemrc"
+  - gem install bundler
 before_script:
   - cp config/database.yml.travis config/database.yml
 script:
