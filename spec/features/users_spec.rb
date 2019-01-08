@@ -28,11 +28,10 @@ RSpec.describe 'Cards', type: :feature do
       it 'with vk', driver: :mechanize do
         visit log_in_path
         click_link 'Login vk'
-        # binding.pry
-        fill_in :email, with: 'd123@ya.ru'
-        fill_in :pass, with: '23'
+        fill_in :email, with: '89067092702'
+        fill_in :pass, with: 'este12#'
         click_button 'Log in'
-        # save_and_open_page
+        click_button 'Allow'
       end
     end
   end
