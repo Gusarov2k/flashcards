@@ -40,7 +40,7 @@ class CardsController < ApplicationController
 
   def random
     # @card = Card.ready_for_review.where(user_id: current_user.id).random.first
-    @card = Card.ready_for_review.random.first
+    @card = current_user.cards.ready_for_review.random.first
   end
 
   def word_comparison

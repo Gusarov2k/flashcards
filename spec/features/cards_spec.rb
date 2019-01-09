@@ -123,7 +123,7 @@ RSpec.describe 'Cards', type: :feature do
   end
 
   describe '#word_comparison' do
-    let(:card) { create(:card, :user) }
+    let(:card) { create(:card, user_id: user.id) }
 
     before do
       card.update(review_date: ((Date.current - 1.day)).to_s)
