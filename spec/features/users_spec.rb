@@ -15,27 +15,6 @@ RSpec.describe 'Cards', type: :feature do
     end
   end
 
-  describe 'log in with other services' do
-    context 'when true access' do
-      it 'with github', driver: :mechanize do
-        visit log_in_path
-        click_link 'Login github'
-        fill_in 'Username or email address', with: 'd123'
-        fill_in 'Password', with: '23'
-        click_button 'Sign in'
-      end
-
-      it 'with vk', driver: :mechanize do
-        visit log_in_path
-        click_link 'Login vk'
-        fill_in :email, with: '89067092702'
-        fill_in :pass, with: 'este12#'
-        click_button 'Log in'
-        click_button 'Allow'
-      end
-    end
-  end
-
   describe 'validates' do
     let(:user) { build(:user) }
 
