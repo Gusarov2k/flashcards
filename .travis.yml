@@ -7,9 +7,8 @@ env:
   - DB=postgresql
 before_install:
   - gem i rubygems-update -v '<3' && update_rubygems
-  - gem install bundler
+  - update_rubygems
   - "echo 'gem: --no-ri --no-rdoc' > ~/.gemrc"
-bundler_args: --without development --jobs=3 --retry=3
 before_script:
   - cp config/database.yml.travis config/database.yml
 script:
