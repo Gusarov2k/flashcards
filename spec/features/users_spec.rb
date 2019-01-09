@@ -68,7 +68,7 @@ RSpec.describe 'Cards', type: :feature do
 
       it 'password not equal password_confirmation' do
         within('form') do
-          fill_in 'password', with: 12_345
+          fill_in 'password', with: 12345
           fill_in 'password_confirmation', with: 1234
         end
         click_button 'Register'
