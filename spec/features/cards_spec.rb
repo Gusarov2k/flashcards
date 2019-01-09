@@ -87,11 +87,13 @@ RSpec.describe 'Cards', type: :feature do
 
   describe 'destroy card', type: :controller do
     context 'when successful' do
-      let(:card) { create(:card, user_id: user.id) }
+      let!(:card) do
+        create(:card, user_id: user.id,
+                      original_text: 'word',
+                      translated_text: 'other')
+      end
 
       it 'delete card' do
-        card.original_text = 'word'
-        card.translated_text = 'other'
         visit cards_path
         expect { click_link 'Delete', href: "/cards/#{card.id}" }.to change(Card, :count).by(-1)
       end
