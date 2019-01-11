@@ -1,7 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Users', type: :feature do
-  include LogInHelper
+RSpec.describe 'Cards', type: :feature do
   describe 'when not authorization' do
     context 'when links' do
       it 'login in' do
@@ -12,20 +11,6 @@ RSpec.describe 'Users', type: :feature do
       it 'sign up' do
         visit sign_up_path
         expect(page).to have_content('New user')
-      end
-
-      it 'text about need authorization' do
-        visit root_path
-        expect(page).to have_content('Please login first.')
-      end
-
-      it 'email is incorrect' do
-        visit log_in_path
-        within('form') do
-          fill_in 'Email', with: 'yea@ya.ru'
-        end
-        click_button 'Log In'
-        expect(page).to have_content('E-mail and/or password is incorrect.')
       end
     end
   end
@@ -92,39 +77,17 @@ RSpec.describe 'Users', type: :feature do
     end
   end
 
-  describe 'user registration' do
-    before do
-      visit sign_up_path
-    end
-
-    context 'when successful' do
-      it 'all fields are correct' do
-        within('form') do
-          fill_in 'Name', with: 'yand3'
-          fill_in 'email', with: 'ers@ya.ru'
-          fill_in 'password', with: '12345'
-          fill_in 'password_confirmation', with: '12345'
-        end
-        click_button 'Register'
-        expect(page).to have_content('Welcome!')
-      end
-    end
-  end
-
-  describe 'update user' do
+  describe 'user update' do
     let(:user) { create(:user) }
 
     before do
-      log_in(user.email, 'secret', 'Log In')
+      visit log_in_url
+      fill_in 'Email',    with: user.email
+      fill_in 'Password', with: 'secret'
+      click_button 'Log In'
     end
 
-<<<<<<< HEAD
     context 'when successful' do
-=======
-
-    context 'when successful' do
-
->>>>>>> 008821e... add tests
       it 'update name and return text message' do
         visit edit_user_path(user)
         within('form') do
@@ -134,10 +97,6 @@ RSpec.describe 'Users', type: :feature do
         expect(page).to have_content('User was successfully updated.')
       end
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 008821e... add tests
       it 'update email and return text message' do
         visit edit_user_path(user)
         within('form') do
@@ -146,30 +105,6 @@ RSpec.describe 'Users', type: :feature do
         click_button 'Register'
         expect(page).to have_content('User was successfully updated.')
       end
-    end
-
-    context 'when fail' do
-      it 'empty email' do
-        visit edit_user_path(user)
-        within('form') do
-          fill_in 'email', with: ''
-        end
-        click_button 'Register'
-        expect(page).to have_content('Email can\'t be blank')
-      end
-    end
-  end
-
-  describe 'exit' do
-    let(:user) { create(:user) }
-
-    before do
-      log_in(user.email, 'secret', 'Log In')
-    end
-
-    it do
-      click_link 'Log Out'
-      expect(page).to have_content('See you!')
     end
   end
 end
