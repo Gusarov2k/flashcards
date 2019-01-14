@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe 'Cards', type: :feature do
+  include LogInHelper
+  let(:user) { create(:user) }
+
+  before do
+    log_in(user.email, 'secret', 'Log In')
+  end
+
   describe 'card creation' do
     context 'when successful' do
       it 'create card' do
@@ -76,13 +83,15 @@ RSpec.describe 'Cards', type: :feature do
     end
   end
 
-  describe 'destroy card' do
+  describe 'destroy card', type: :controller do
     context 'when successful' do
-      let(:card) { create(:card) }
+      let!(:card) do
+        create(:card, user_id: user.id,
+                      original_text: 'word',
+                      translated_text: 'other')
+      end
 
       it 'delete card' do
-        card.original_text = 'word'
-        card.translated_text = 'other'
         visit cards_path
         expect { click_link 'Delete', href: "/cards/#{card.id}" }.to change(Card, :count).by(-1)
       end
@@ -114,7 +123,7 @@ RSpec.describe 'Cards', type: :feature do
   end
 
   describe '#word_comparison' do
-    let(:card) { create(:card) }
+    let(:card) { create(:card, user_id: user.id) }
 
     before do
       card.update(review_date: ((Date.current - 1.day)).to_s)

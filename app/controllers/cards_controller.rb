@@ -2,7 +2,7 @@ class CardsController < ApplicationController
   before_action :set_card, only: %i[show edit update destroy word_comparison]
 
   def index
-    @cards = Card.all
+    @cards = current_user.cards
   end
 
   def show; end
@@ -15,6 +15,7 @@ class CardsController < ApplicationController
 
   def create
     @card = Card.new(card_params)
+    @card.user_id = current_user.id
 
     if @card.save
       redirect_to @card
@@ -37,7 +38,7 @@ class CardsController < ApplicationController
   end
 
   def random
-    @card = Card.ready_for_review.random.first
+    @card = current_user.cards.ready_for_review.random.first
   end
 
   def word_comparison
