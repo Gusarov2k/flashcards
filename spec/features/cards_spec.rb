@@ -21,6 +21,24 @@ RSpec.describe 'Cards', type: :feature do
       end
     end
 
+    describe 'card creation with image' do
+      before do
+        body_file = File.open(File.expand_path('./spec/support/logo_image.jpg'))
+        stub_request(:get, 'https://www.thedomainofmyimage.com/image/test.jpg').to_return(body: body_file, status: 200)
+      end
+
+      it 'image from url' do
+        visit new_card_path
+        within('form') do
+          fill_in 'Оригинальный текст', with: 'trace'
+          fill_in 'Перевод текста', with: 'race'
+          fill_in 'image from url', with: 'https://www.thedomainofmyimage.com/image/test.jpg'
+        end
+        click_button 'Create'
+        expect(page).to have_content('trace')
+      end
+    end
+
     context 'when fails' do
       it 'compare words ace with ace and return text message' do
         visit new_card_path
@@ -164,6 +182,22 @@ RSpec.describe 'Cards', type: :feature do
         click_button 'Save Check'
         expect(page).to have_content 'Your word is not equal to the original'
       end
+    end
+  end
+
+  describe 'with image' do
+    include CarrierWave::Test::Matchers
+
+    let(:card) { create(:card, user_id: user.id) }
+
+    before do
+      card.update(review_date: ((Date.current - 1.day)).to_s)
+      visit root_path
+    end
+
+    context 'when true' do
+      it { expect(card.image).to be_format('JPEG') }
+      it { expect(card.image).to have_dimensions(360, 360) }
     end
   end
 end

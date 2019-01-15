@@ -1,7 +1,12 @@
-<%= simple_form_for( @card, html: { class: 'form-group' }) do |f| %>
+<%= simple_form_for( @card, html: { class: 'form-group', multipart: true }) do |f| %>
   <%= f.error_notification %>
   <%= f.input :original_text, label: 'Оригинальный текст' %>
   <%= f.input :translated_text, label: 'Перевод текста' %>
+  <%= image_tag(@card.image) if @card.image? %>
+  <%= f.file_field :image, label: 'Select image'%> <br>
+  <%= image_tag(@card.image_url) if @card.image? %>
+  <%= f.label :remote_image_url, 'image from url' %> <br>
+  <%= f.text_field :remote_image_url %> <br>
   <%= f.button :submit, "Create", class: "btn-primary" %>
   <%= f.button :button, "Clear", type: "reset", class: "btn-outline-secondary" %>
 <% end %>
