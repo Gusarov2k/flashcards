@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Card, type: :model do
+  # include CarrierWaveDirect::Test::CapybaraHelpers
+
   let(:card) { build(:card) }
 
   describe 'associations' do
