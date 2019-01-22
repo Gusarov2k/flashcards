@@ -21,20 +21,21 @@ RSpec.describe 'Cards', type: :feature do
       end
     end
 
-    describe 'image download' do
-      after do
+    describe 'card creation with image' do
+      before do
         body_file = File.open(File.expand_path('./spec/support/logo_image.jpg'))
-        stub_request(:get, 'www.thedomainofmyimage.example.image.jpg').to_return(body: body_file, status: 200)
+        stub_request(:get, 'https://www.thedomainofmyimage.com/image/test.jpg').to_return(body: body_file, status: 200)
       end
 
-      it 'create card with img from url' do
+      it 'image from url' do
         visit new_card_path
         within('form') do
-          fill_in 'Оригинальный текст', with: 'ace'
+          fill_in 'Оригинальный текст', with: 'trace'
           fill_in 'Перевод текста', with: 'race'
-          fill_in 'image from url', with: 'www.thedomainofmyimage.example.image.jpg'
+          fill_in 'image from url', with: 'https://www.thedomainofmyimage.com/image/test.jpg'
         end
         click_button 'Create'
+        expect(page).to have_content('trace')
       end
     end
 
