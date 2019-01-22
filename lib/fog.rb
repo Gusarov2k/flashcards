@@ -1,3 +1,2 @@
 module Fog
-  # :D
 end
