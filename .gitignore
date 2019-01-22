@@ -16,6 +16,6 @@
 !/log/.keep
 /tmp
 coverage
-public/uploads/tmp/*
+public/uploads/*
 
 .env
