@@ -16,5 +16,9 @@
 !/log/.keep
 /tmp
 coverage
+.DS_Store
+/public/.DS_Store
+/public/uploads/.DS_Store
+/public/uploads/*
 
 .env
