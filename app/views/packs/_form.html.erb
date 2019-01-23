@@ -1,0 +1,5 @@
+<%= simple_form_for( @pack, html: { class: 'form-group' }) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :name, label: 'Name for pack' %>
+  <%= f.button :submit, "Create", class: "btn-primary" %>
+<% end %>

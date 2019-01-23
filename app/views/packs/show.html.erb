@@ -1,0 +1,18 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">name</th>
+        <th scope="col">edit</th>
+        <th scope="col">home</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><%= @pack.name %></td>
+          <td><%= link_to 'Edit', edit_pack_path %></td>
+          <td><%= link_to 'Back', packs_path %></td>
+        </tr>
+    </tbody>
+  </table>
+</div>

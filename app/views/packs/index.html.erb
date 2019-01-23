@@ -1,0 +1,22 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Current</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @packs.each do |c| %>
+        <tr>
+          <td><%= c.name %></td>
+          <td><%= (link_to 'current', current_pack_path(c), method: :patch) %></td>
+          <td><%= link_to 'Edit', edit_pack_path(c) %></td>
+          <td><%= link_to 'Delete', pack_path(c), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

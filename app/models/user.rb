@@ -5,8 +5,8 @@ class User < ActiveRecord::Base
   has_many :authentications, dependent: :destroy
   accepts_nested_attributes_for :authentications
 
-  has_many :cards, dependent: :destroy
-  accepts_nested_attributes_for :cards
+  has_many :packs
+  belongs_to :current_pack, class_name: 'Pack', foreign_key: 'current_pack_id'
 
   validates :password, length: { minimum: 5 }, presence: true, if: -> { new_record? || changes[:crypted_password] }
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }
