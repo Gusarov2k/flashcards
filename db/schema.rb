@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190115134250) do
+ActiveRecord::Schema.define(version: 20190213154105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,8 +32,13 @@ ActiveRecord::Schema.define(version: 20190115134250) do
     t.date     "review_date"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.integer  "user_id"
     t.string   "image"
+    t.integer  "pack_id"
+  end
+
+  create_table "packs", force: :cascade do |t|
+    t.string  "name"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -43,6 +48,7 @@ ActiveRecord::Schema.define(version: 20190115134250) do
     t.datetime "remember_me_token_expires_at"
     t.string   "crypted_password"
     t.string   "salt"
+    t.integer  "current_pack_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

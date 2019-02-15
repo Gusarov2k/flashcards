@@ -1,9 +1,10 @@
 class Card < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
-  belongs_to :user
+  belongs_to :pack
 
   validates :original_text, :translated_text, presence: true
+  validates :pack_id, presence: true
   validate :clear_words, if: proc { |a| a.original_text? && a.translated_text? }
   validate :change_string, if: proc { |a| a.original_text? && a.translated_text? }
 
@@ -11,6 +12,7 @@ class Card < ActiveRecord::Base
 
   scope :ready_for_review, -> { where("review_date <= ?", Time.now) }
   scope :random, -> { order('RANDOM()') }
+  scope :all_cards, ->(packs) { where(pack_id: packs.pluck(:id)) }
 
   def check_word(user_text)
     original_text.casecmp(user_text.mb_chars.strip.downcase).zero?

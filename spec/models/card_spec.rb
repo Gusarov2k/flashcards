@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Card, type: :model do
-  let(:card) { build(:card) }
+  let(:pack) { create(:pack) }
+  let(:card) { build(:card, pack_id: pack.id) }
 
   describe 'associations' do
-    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:pack) }
   end
 
   describe 'validations' do

@@ -1,8 +1,9 @@
 class CardsController < ApplicationController
   before_action :set_card, only: %i[show edit update destroy word_comparison]
+  before_action :find_all_packs, only: %i[index new create edit update]
 
   def index
-    @cards = current_user.cards
+    @cards = Card.all_cards(@packs)
   end
 
   def show; end
@@ -14,8 +15,8 @@ class CardsController < ApplicationController
   def edit; end
 
   def create
+    @packs = current_user.packs
     @card = Card.new(card_params)
-    @card.user_id = current_user.id
 
     if @card.save
       redirect_to @card
@@ -38,7 +39,12 @@ class CardsController < ApplicationController
   end
 
   def random
-    @card = current_user.cards.ready_for_review.random.first
+    @card = if current_user.current_pack
+              current_user.current_pack.cards.ready_for_review.random.first
+            else
+              flash[:flash_message] = 'Haven\'t current pack'
+              render 'random'
+            end
   end
 
   def word_comparison
@@ -54,6 +60,10 @@ class CardsController < ApplicationController
 
   private
 
+  def find_all_packs
+    @packs = current_user.packs
+  end
+
   def set_card
     @card = Card.find(params[:id])
   end
@@ -64,6 +74,7 @@ class CardsController < ApplicationController
                                  :review_date,
                                  :image,
                                  :image_cache,
-                                 :remote_image_url)
+                                 :remote_image_url,
+                                 :pack_id)
   end
 end

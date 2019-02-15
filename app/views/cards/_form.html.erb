@@ -2,6 +2,7 @@
   <%= f.error_notification %>
   <%= f.input :original_text, label: 'Оригинальный текст' %>
   <%= f.input :translated_text, label: 'Перевод текста' %>
+  <%= f.collection_select(:pack_id, @packs, :id, :name) %> <br>
   <%= image_tag(@card.image) if @card.image? %>
   <%= f.file_field :image, label: 'Select image'%> <br>
   <%= image_tag(@card.image_url) if @card.image? %>

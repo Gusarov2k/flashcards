@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Cards', type: :feature do
   include LogInHelper
   let(:user) { create(:user) }
+  let!(:pack) { create(:pack, user_id: user.id) }
 
   before do
     log_in(user.email, 'secret', 'Log In')
@@ -15,6 +16,7 @@ RSpec.describe 'Cards', type: :feature do
         within('form') do
           fill_in 'Оригинальный текст', with: 'ace'
           fill_in 'Перевод текста', with: 'race'
+          select 'first', from: 'card[pack_id]'
         end
         click_button 'Create'
         expect(page).to have_content('Перевод')
@@ -33,6 +35,7 @@ RSpec.describe 'Cards', type: :feature do
           fill_in 'Оригинальный текст', with: 'trace'
           fill_in 'Перевод текста', with: 'race'
           fill_in 'image from url', with: 'https://www.thedomainofmyimage.com/image/test.jpg'
+          select 'first', from: 'card[pack_id]'
         end
         click_button 'Create'
         expect(page).to have_content('trace')
@@ -45,6 +48,7 @@ RSpec.describe 'Cards', type: :feature do
         within('form') do
           fill_in 'Оригинальный текст', with: 'ace'
           fill_in 'Перевод текста', with: 'ace'
+          select 'first', from: 'card[pack_id]'
         end
         click_button 'Create'
         expect(page).to have_content('Original text Original text can\'t be translated')
@@ -55,6 +59,7 @@ RSpec.describe 'Cards', type: :feature do
         within('form') do
           fill_in 'Оригинальный текст', with: 'ace'
           fill_in 'Перевод текста', with: 'AcE'
+          select 'first', from: 'card[pack_id]'
         end
         click_button 'Create'
         expect(page).to have_content('Original text Original text can\'t be translated')
@@ -65,6 +70,7 @@ RSpec.describe 'Cards', type: :feature do
         within('form') do
           fill_in 'Оригинальный текст', with: 'aCe'
           fill_in 'Перевод текста', with: 'AcE'
+          select 'first', from: 'card[pack_id]'
         end
         click_button 'Create'
         expect(page).to have_content('Original text Original text can\'t be translated')
@@ -73,7 +79,7 @@ RSpec.describe 'Cards', type: :feature do
   end
 
   describe 'card update' do
-    let(:card) { create(:card) }
+    let(:card) { create(:card, pack_id: pack.id) }
 
     before do
       visit edit_card_path(card)
@@ -84,6 +90,7 @@ RSpec.describe 'Cards', type: :feature do
         within('form') do
           fill_in 'Оригинальный текст', with: 'gnom'
           fill_in 'Перевод текста', with: 'guru'
+          select 'first', from: 'card[pack_id]'
         end
         click_button 'Create'
         expect(page).to have_content('guru')
@@ -104,9 +111,9 @@ RSpec.describe 'Cards', type: :feature do
   describe 'destroy card', type: :controller do
     context 'when successful' do
       let!(:card) do
-        create(:card, user_id: user.id,
-                      original_text: 'word',
-                      translated_text: 'other')
+        create(:card, original_text: 'word',
+                      translated_text: 'other',
+                      pack_id: pack.id)
       end
 
       it 'delete card' do
@@ -141,9 +148,11 @@ RSpec.describe 'Cards', type: :feature do
   end
 
   describe '#word_comparison' do
-    let(:card) { create(:card, user_id: user.id) }
+    let(:pack) { create(:pack, user_id: user.id) }
+    let(:card) { create(:card, pack_id: pack.id) }
 
     before do
+      user.update(current_pack_id: pack.id)
       card.update(review_date: ((Date.current - 1.day)).to_s)
       visit root_path
     end
@@ -188,7 +197,7 @@ RSpec.describe 'Cards', type: :feature do
   describe 'with image' do
     include CarrierWave::Test::Matchers
 
-    let(:card) { create(:card, user_id: user.id) }
+    let(:card) { create(:card, pack_id: pack.id) }
 
     before do
       card.update(review_date: ((Date.current - 1.day)).to_s)

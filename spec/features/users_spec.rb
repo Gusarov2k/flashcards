@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Cards', type: :feature do
+  include LogInHelper
   describe 'when not authorization' do
     context 'when links' do
       it 'login in' do
@@ -12,6 +13,55 @@ RSpec.describe 'Cards', type: :feature do
         visit sign_up_path
         expect(page).to have_content('New user')
       end
+    end
+
+    it 'when a user tries to access a resource without authorization' do
+      visit cards_path
+      expect(page).to have_content('Please login first.')
+    end
+  end
+
+  describe 'user authorization' do
+    let(:user) { build(:user) }
+
+    context 'when wrong' do
+      before do
+        visit log_in_path
+      end
+
+      it 'email incorrect' do
+        within('form') do
+          fill_in 'Email', with: 'ivan@el.ru'
+        end
+        click_button 'Log In'
+        expect(page).to have_content('E-mail and/or password is incorrect.')
+      end
+
+      it 'password incorrect' do
+        within('form') do
+          fill_in 'Password', with: '123qs'
+        end
+        click_button 'Log In'
+        expect(page).to have_content('E-mail and/or password is incorrect.')
+      end
+    end
+  end
+
+  describe 'create' do
+    before do
+      visit sign_up_path
+    end
+
+    it 'when successfully' do
+      within('form') do
+        fill_in 'Name', with: 'Jon'
+        fill_in 'email', with: 'jo@ya.ru'
+        fill_in 'password', with: '12345'
+        fill_in 'password_confirmation', with: '12345'
+      end
+
+      click_button 'Register'
+      expect(page).to have_content('Welcome!')
     end
   end
 
@@ -81,10 +131,7 @@ RSpec.describe 'Cards', type: :feature do
     let(:user) { create(:user) }
 
     before do
-      visit log_in_url
-      fill_in 'Email',    with: user.email
-      fill_in 'Password', with: 'secret'
-      click_button 'Log In'
+      log_in(user.email, 'secret', 'Log In')
     end
 
     context 'when successful' do
@@ -105,6 +152,30 @@ RSpec.describe 'Cards', type: :feature do
         click_button 'Register'
         expect(page).to have_content('User was successfully updated.')
       end
+    end
+
+    context 'when false' do
+      it 'name is blank' do
+        visit edit_user_path(user)
+        within('form') do
+          fill_in 'Name', with: ''
+        end
+        click_button 'Register'
+        expect(page).to have_content('Name is invalid')
+      end
+    end
+  end
+
+  describe 'user exit' do
+    let(:user) { create(:user) }
+
+    before do
+      log_in(user.email, 'secret', 'Log In')
+    end
+
+    it 'session destroy' do
+      click_link 'Log Out'
+      expect(page).to have_content('See you!')
     end
   end
 end

@@ -21,4 +21,10 @@ Rails.application.routes.draw do
   end
 
   get 'oauth/:provider' => 'oauths#oauth', as: :auth_at_provider
+
+  resources :packs do
+    member do
+      patch 'current'
+    end
+  end
 end
