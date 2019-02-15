@@ -3,6 +3,7 @@ SimpleCov.start
 require 'capybara/rspec'
 require 'rails_helper'
 require 'support/login_helper.rb'
+require 'support/form_helper.rb'
 require 'webmock/rspec'
 
 RSpec.configure do |config|

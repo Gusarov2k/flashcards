@@ -45,13 +45,6 @@ RSpec.describe Card, type: :model do
     end
   end
 
-  describe '#recheck_date' do
-    it 'add 3 days to review_date' do
-      card.save
-      expect(card.review_date).to eq(Date.today + 3.days)
-    end
-  end
-
   describe '#check_word' do
     let(:card) { build(:card, original_text: 'hause') }
 

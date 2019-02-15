@@ -8,9 +8,9 @@ class Card < ActiveRecord::Base
   validate :clear_words, if: proc { |a| a.original_text? && a.translated_text? }
   validate :change_string, if: proc { |a| a.original_text? && a.translated_text? }
 
-  before_create :recheck_date
+  before_create :set_review_date_as_now
 
-  scope :ready_for_review, -> { where("review_date <= ?", Time.now) }
+  scope :ready_for_review, -> { where("review_date <= ?", Time.zone.now) }
   scope :random, -> { order('RANDOM()') }
   scope :all_cards, ->(packs) { where(pack_id: packs.pluck(:id)) }
 
@@ -18,8 +18,31 @@ class Card < ActiveRecord::Base
     original_text.casecmp(user_text.mb_chars.strip.downcase).zero?
   end
 
-  def recheck_date
-    self.review_date = (Date.today + 3.days).to_s
+  def set_review_date_as_now
+    self.review_date = Time.zone.now.to_s
+  end
+
+  def set_review_date_and_box
+    hash = {  0 => [1, 12.hours],
+              1 => [2, 3.days],
+              2 => [3, 7.days],
+              3 => [4, 14.days],
+              4 => [5, 1.month],
+              5 => [5, 1.month] }
+    box_value, review_date = hash[box]
+    self.box = box_value
+    self.review_date = Time.zone.now + review_date
+    save
+  end
+
+  def check_bad_guessing
+    if guessing == 3
+      self.box = 1
+      self.guessing = 0
+    else
+      self.guessing += 1
+    end
+    save
   end
 
   private
