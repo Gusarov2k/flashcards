@@ -4,7 +4,7 @@
   <%= f.input :translated_text, label: 'Перевод текста' %>
   <%= (f.input :review_date) if @card.persisted? %>
   <%= f.collection_select(:pack_id, @packs, :id, :name) %> <br>
-  <%= image_tag(@card.image) if @card.persisted? %>
+  <%= image_tag(@card.image) if @card.image? %>
   <%= f.file_field :image, label: 'Select image'%> <br>
   <%= image_tag(@card.image_url) if @card.image? %>
   <%= f.label :remote_image_url, 'image from url' %> <br>
