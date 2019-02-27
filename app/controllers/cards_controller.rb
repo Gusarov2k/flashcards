@@ -49,11 +49,12 @@ class CardsController < ApplicationController
 
   def word_comparison
     if @card.check_word(params[:check][:user_text])
-      @card.recheck_date
       flash[:flash_message] = 'You have guessed the word!'
+      @card.set_review_date_and_box
       redirect_to root_path
     else
       flash.now[:flash_message] = 'Your word is not equal to the original'
+      @card.check_bad_guessing
       render 'random'
     end
   end

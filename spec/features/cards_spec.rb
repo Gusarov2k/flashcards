@@ -148,30 +148,70 @@ RSpec.describe 'Cards', type: :feature do
   end
 
   describe '#word_comparison' do
-    let(:pack) { create(:pack, user_id: user.id) }
-    let(:card) { create(:card, pack_id: pack.id) }
+    include FormHelper
+    include ActiveSupport::Testing::TimeHelpers
+    let!(:pack) { create(:pack, user_id: user.id) }
+    let!(:card) { create(:card, pack_id: pack.id) }
 
     before do
       user.update(current_pack_id: pack.id)
-      card.update(review_date: ((Date.current - 1.day)).to_s)
       visit root_path
     end
 
     context 'when correct' do
-      it 'compare word home and return text message' do
-        within('form') do
-          fill_in 'check[user_text]', with: 'home'
-        end
-        click_button 'Save Check'
-        expect(page).to have_content 'You have guessed the word!'
+      it 'card will have first box' do
+        check_form
+        expect(card.box).to equal(1)
       end
 
-      it 'compare word HomE and return text message' do
-        within('form') do
-          fill_in 'check[user_text]', with: 'HomE'
-        end
-        click_button 'Save Check'
-        expect(page).to have_content 'You have guessed the word!'
+      it 'card will add 12 hours for first box' do
+        check_form
+        expect(card.review_date).to be_within(1.second).of(Time.zone.now + 12.hours)
+      end
+
+      it 'card will have second box' do
+        check_form(1)
+        expect(card.box).to equal(2)
+      end
+
+      it 'card will add 3 days for second box' do
+        check_form(1)
+        expect(card.review_date).to be_within(1.second).of(Time.zone.now + 3.days)
+      end
+
+      it 'card will have 3 box' do
+        check_form(2)
+        expect(card.box).to equal(3)
+      end
+
+      it 'card will add 7 days for 3 box' do
+        check_form(2)
+        expect(card.review_date).to be_within(1.second).of(Time.zone.now + 7.days)
+      end
+
+      it 'card will have 4 box' do
+        check_form(3)
+        expect(card.box).to equal(4)
+      end
+
+      it 'card will add 14 days for 4 box' do
+        check_form(3)
+        expect(card.review_date).to be_within(1.second).of(Time.zone.now + 14.days)
+      end
+
+      it 'card will have 5 box' do
+        check_form(4)
+        expect(card.box).to equal(5)
+      end
+
+      it 'card will add 1 month for 5 box' do
+        check_form(4)
+        expect(card.review_date).to be_within(1.second).of(Time.zone.now + 1.month)
+      end
+
+      it 'card had box 5 and add 1 month' do
+        check_form(5)
+        expect(card.review_date).to be_within(1.second).of(Time.zone.now + 1.month)
       end
     end
 
@@ -190,6 +230,38 @@ RSpec.describe 'Cards', type: :feature do
         end
         click_button 'Save Check'
         expect(page).to have_content 'Your word is not equal to the original'
+      end
+
+      it 'first unsuccessful guessing attempt' do
+        within('form') do
+          fill_in 'check[user_text]', with: 'rest'
+        end
+        click_button 'Save Check'
+        card.reload
+        expect(card.guessing).to equal(1)
+      end
+
+      it 'incorrectly guessed 3 times and moving the card to the first box' do
+        card.guessing = 3
+        card.box = 4
+        card.save
+        within('form') do
+          fill_in 'check[user_text]', with: 'reses'
+        end
+        click_button 'Save Check'
+        card.reload
+        expect(card.box).to equal(1)
+      end
+
+      it 'incorrectly guessed 3 times and reset the guessing to 0' do
+        card.guessing = 3
+        card.save
+        within('form') do
+          fill_in 'check[user_text]', with: 'reses'
+        end
+        click_button 'Save Check'
+        card.reload
+        expect(card.guessing).to equal(0)
       end
     end
   end
