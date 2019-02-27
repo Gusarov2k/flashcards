@@ -16,7 +16,7 @@
           <td><%= c.translated_text %></td>
           <td><%= c.review_date.to_formatted_s(:rfc822) %></td>
           <td><%= link_to 'Edit', edit_card_path(c) %></td>
-          <td><%= link_to 'Delete', card_path(c), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Delete', card_path(c), method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     </tbody>

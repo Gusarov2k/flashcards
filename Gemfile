@@ -36,6 +36,7 @@ gem 'sorcery'
 gem 'carrierwave', '>= 1.0.0.beta'
 gem 'fog-aws'
 gem 'mini_magick'
+gem 'text', '>= 1.3.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -44,6 +45,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'rails-footnotes', '~> 4.0'
+  gem 'rb-readline'
   gem 'rubocop', require: false
   gem 'rubocop-rspec', require: false
 end

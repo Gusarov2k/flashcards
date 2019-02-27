@@ -48,12 +48,19 @@ class CardsController < ApplicationController
   end
 
   def word_comparison
-    if @card.check_word(params[:check][:user_text])
-      flash[:flash_message] = 'You have guessed the word!'
+    @levenshtein = @card.levenshtein(params[:check][:user_text])
+    if @levenshtein <= 2
+      flash[:flash_message] = if @levenshtein.zero?
+                                'You have guessed the word!'
+                              else
+                                "Your are guessing but:
+                                Original text: #{@card.original_text}
+                                your variant: #{params[:check][:user_text]}"
+                              end
       @card.set_review_date_and_box
       redirect_to root_path
     else
-      flash.now[:flash_message] = 'Your word is not equal to the original'
+      flash[:flash_message] = 'Your word is not equal to the original'
       @card.check_bad_guessing
       render 'random'
     end

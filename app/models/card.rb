@@ -14,8 +14,8 @@ class Card < ActiveRecord::Base
   scope :random, -> { order('RANDOM()') }
   scope :all_cards, ->(packs) { where(pack_id: packs.pluck(:id)) }
 
-  def check_word(user_text)
-    original_text.casecmp(user_text.mb_chars.strip.downcase).zero?
+  def levenshtein(user_text)
+    Text::Levenshtein.distance(original_text, user_text.mb_chars.strip.downcase)
   end
 
   def set_review_date_as_now
