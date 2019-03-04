@@ -45,17 +45,17 @@ RSpec.describe Card, type: :model do
     end
   end
 
-  describe '#check_word' do
+  describe '#levenshtein' do
     let(:card) { build(:card, original_text: 'hause') }
 
     context 'when word valid' do
-      it { expect(card.check_word('Hause')).to be_truthy }
-      it { expect(card.check_word('  HausE ')).to be_truthy }
-      it { expect(card.check_word('dom')).not_to be_truthy }
+      it { expect(card.levenshtein('Hause')).to be_zero }
+      it { expect(card.levenshtein('  HausE ')).to be_zero }
     end
 
     context 'when word not valid' do
-      it { expect(card.check_word('')).not_to be_truthy }
+      it { expect(card.levenshtein('dom')).to be >= 1 }
+      it { expect(card.levenshtein('')).to be >= 1 }
     end
   end
 end

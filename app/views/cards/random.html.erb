@@ -4,11 +4,13 @@
   </p>
     <% if current_user.current_pack_id %>
       <% if  @card %>
-        <p class="Message"><%= flash[:flash_message] %></p>
         <%= render 'form_random' %>
       <% else %>
         <p class="lead">Сейчас нет карточек для проверки, загляните позже.</p>
        <% end %>
+       <b class="Message"> <%= flash[:flash_message] %> </b><br>
+       <b class="Message"> <%= flash[:original_message] %> </b><br>
+       <b class="Message"> <%= flash[:user_message] %> </b>
     <% else %>
       <%= flash[:flash_message] %>
     <% end %>

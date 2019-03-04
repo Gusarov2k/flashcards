@@ -213,6 +213,30 @@ RSpec.describe 'Cards', type: :feature do
         check_form(5)
         expect(card.review_date).to be_within(1.second).of(Time.zone.now + 1.month)
       end
+
+      it 'the word is guessed without errors' do
+        within('form') do
+          fill_in 'check[user_text]', with: 'home'
+        end
+        click_button 'Save Check'
+        expect(page).to have_content "You have guessed the word!"
+      end
+
+      it 'word contain 1 errors' do
+        within('form') do
+          fill_in 'check[user_text]', with: 'hom'
+        end
+        click_button 'Save Check'
+        expect(page).to have_content "Original text: #{card.original_text}"
+      end
+
+      it 'word contain 2 errors' do
+        within('form') do
+          fill_in 'check[user_text]', with: 'ho'
+        end
+        click_button 'Save Check'
+        expect(page).to have_content "Original text: #{card.original_text}"
+      end
     end
 
     context 'when not correct' do
