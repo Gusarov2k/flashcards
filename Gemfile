@@ -37,6 +37,7 @@ gem 'carrierwave', '>= 1.0.0.beta'
 gem 'fog-aws'
 gem 'mini_magick'
 gem 'text', '>= 1.3.1'
+gem 'whenever', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -61,6 +62,7 @@ group :test do
   gem 'shoulda-matchers', '4.0.0.rc1'
   gem 'simplecov', require: false
   gem 'webmock'
+  gem 'whenever-test'
 end
 
 group :development do
@@ -68,6 +70,7 @@ group :development do
   gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'letter_opener'
   gem 'spring'
   gem 'spring-commands-rspec'
 end
