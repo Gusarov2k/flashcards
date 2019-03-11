@@ -23,4 +23,32 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe 'scope with_unreviewed_cards' do
+    let(:user) { create(:user) }
+    let(:second_user) { create(:user, name: 'second', email: 'second@cer.ru') }
+    let(:pack_second) { create(:pack, name: 'second', user: user) }
+    let(:pack_third) { create(:pack, name: 'third', user: second_user) }
+    let(:card_second) { create(:card, original_text: 'second', pack: pack_second) }
+    let(:card_third) { create(:card, original_text: 'third', pack: pack_third) }
+
+    before do
+      card_second.pack.user.update(current_pack_id: card_second.pack.id)
+      card_third.pack.user.update(current_pack_id: card_third.pack.id)
+      card_second.update(review_date: Time.zone.now - 1.day)
+      card_third.update(review_date: Time.zone.now + 1.minute)
+    end
+
+    context 'when true' do
+      it 'return user with card for review' do
+        expect(User.with_unreviewed_cards).to match_array(card_second.pack.user)
+      end
+    end
+
+    context 'when false' do
+      it 'user with card not for review' do
+        expect(User.with_unreviewed_cards).not_to match_array(card_third.pack.user)
+      end
+    end
+  end
 end

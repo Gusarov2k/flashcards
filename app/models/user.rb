@@ -17,6 +17,12 @@ class User < ActiveRecord::Base
 
   validate :clear_words, if: proc { |a| a.name? && a.email? }
 
+  scope :with_unreviewed_cards, lambda {
+                                  joins(packs: :cards)
+                                    .where('packs.id = users.current_pack_id AND cards.review_date <= ?',
+                                           Time.zone.now).distinct
+                                }
+
   private
 
   def clear_words
