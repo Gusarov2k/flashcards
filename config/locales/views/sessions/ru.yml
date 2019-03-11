@@ -1,0 +1,8 @@
+ru:
+  sessions:
+    new:
+      header: 'Аутентификация'
+      email: 'Email'
+      password: 'Пароль'
+      remember_me: 'Запомнить меня'
+      log_in: 'Войти'

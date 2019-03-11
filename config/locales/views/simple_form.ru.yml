@@ -1,0 +1,30 @@
+ru:
+  simple_form:
+    user:
+      common:
+        register: '%{action} пользователя'
+    pack:
+      common:
+        cr_pack: '%{action} коллоду'
+    card:
+      common:
+        cr_card: '%{action} карточку'
+    check:
+      common:
+        check_b: 'Проверить'
+    labels:
+      user:
+        name: 'Имя'
+        email: 'Адрес электронной почты'
+        password: 'Пароль'
+        password_confirmation: 'Подтвержение пароля'
+      pack:
+        name: 'Имя коллоды'
+      card:
+        original_text: 'Оригинальный текст'
+        translated_text: 'Перевод текста'
+        image: 'Выбрать картинку'
+        remote_image_url: 'Фото из интернета'
+      check:
+        user_text: 'Ваш вариант оригинала'
+        trans_opt: 'Переведненный вариант'

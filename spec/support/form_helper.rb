@@ -5,7 +5,7 @@ module FormHelper
     within('form') do
       fill_in 'check[user_text]', with: 'home'
     end
-    click_button 'Save Check'
+    click_button 'Check'
     card.reload
   end
 end

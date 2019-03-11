@@ -1,0 +1,8 @@
+ru:
+  users:
+    show:
+      label_user: 'Пользователь: '
+      link_edit: 'Редактировать'
+    edit:
+      header: 'Редактировать пользователя'
+      link_show: 'Показать'

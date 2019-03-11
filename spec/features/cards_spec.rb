@@ -14,8 +14,8 @@ RSpec.describe 'Cards', type: :feature do
       it 'create card' do
         visit new_card_path
         within('form') do
-          fill_in 'Оригинальный текст', with: 'ace'
-          fill_in 'Перевод текста', with: 'race'
+          fill_in 'Original word', with: 'ace'
+          fill_in 'Translated word', with: 'race'
           select 'first', from: 'card[pack_id]'
         end
         click_button 'Create'
@@ -32,9 +32,9 @@ RSpec.describe 'Cards', type: :feature do
       it 'image from url' do
         visit new_card_path
         within('form') do
-          fill_in 'Оригинальный текст', with: 'trace'
-          fill_in 'Перевод текста', with: 'race'
-          fill_in 'image from url', with: 'https://www.thedomainofmyimage.com/image/test.jpg'
+          fill_in 'Original word', with: 'trace'
+          fill_in 'Translated word', with: 'race'
+          fill_in 'Image from url', with: 'https://www.thedomainofmyimage.com/image/test.jpg'
           select 'first', from: 'card[pack_id]'
         end
         click_button 'Create'
@@ -46,8 +46,8 @@ RSpec.describe 'Cards', type: :feature do
       it 'compare words ace with ace and return text message' do
         visit new_card_path
         within('form') do
-          fill_in 'Оригинальный текст', with: 'ace'
-          fill_in 'Перевод текста', with: 'ace'
+          fill_in 'Original word', with: 'ace'
+          fill_in 'Translated word', with: 'ace'
           select 'first', from: 'card[pack_id]'
         end
         click_button 'Create'
@@ -57,8 +57,8 @@ RSpec.describe 'Cards', type: :feature do
       it 'compare words ace with AcE and return text message' do
         visit new_card_path
         within('form') do
-          fill_in 'Оригинальный текст', with: 'ace'
-          fill_in 'Перевод текста', with: 'AcE'
+          fill_in 'Original word', with: 'ace'
+          fill_in 'Translated word', with: 'AcE'
           select 'first', from: 'card[pack_id]'
         end
         click_button 'Create'
@@ -68,8 +68,8 @@ RSpec.describe 'Cards', type: :feature do
       it 'compare words aCe with AcE and return text message' do
         visit new_card_path
         within('form') do
-          fill_in 'Оригинальный текст', with: 'aCe'
-          fill_in 'Перевод текста', with: 'AcE'
+          fill_in 'Original word', with: 'aCe'
+          fill_in 'Translated word', with: 'AcE'
           select 'first', from: 'card[pack_id]'
         end
         click_button 'Create'
@@ -82,16 +82,17 @@ RSpec.describe 'Cards', type: :feature do
     let(:card) { create(:card, pack_id: pack.id) }
 
     before do
-      visit edit_card_path(card)
+      visit edit_card_path(card, locale: I18n.locale)
     end
 
     context 'when successful' do
       it 'update data and return text message' do
         within('form') do
-          fill_in 'Оригинальный текст', with: 'gnom'
-          fill_in 'Перевод текста', with: 'guru'
+          fill_in 'Original word', with: 'gnom'
+          fill_in 'Translated word', with: 'guru'
           select 'first', from: 'card[pack_id]'
         end
+
         click_button 'Create'
         expect(page).to have_content('guru')
       end
@@ -100,7 +101,7 @@ RSpec.describe 'Cards', type: :feature do
     context 'when fails' do
       it 'compare word with empty line and return message' do
         within('form') do
-          fill_in 'Оригинальный текст', with: ''
+          fill_in 'Original word', with: ''
         end
         click_button 'Create'
         expect(page).to have_content('be blank')
@@ -118,7 +119,7 @@ RSpec.describe 'Cards', type: :feature do
 
       it 'delete card' do
         visit cards_path
-        expect { click_link 'Delete', href: "/cards/#{card.id}" }.to change(Card, :count).by(-1)
+        expect { click_link 'Delete', href: "/#{I18n.locale}/cards/#{card.id}" }.to change(Card, :count).by(-1)
       end
     end
   end
@@ -128,8 +129,8 @@ RSpec.describe 'Cards', type: :feature do
       it 'compare words дом with ДоМ and return text message' do
         visit new_card_path
         within('form') do
-          fill_in 'Оригинальный текст', with: 'дом'
-          fill_in 'Перевод текста', with: 'ДоМ'
+          fill_in 'Original word', with: 'дом'
+          fill_in 'Translated word', with: 'ДоМ'
         end
         click_button 'Create'
         expect(page).to have_content('Original text can\'t be translated')
@@ -138,8 +139,8 @@ RSpec.describe 'Cards', type: :feature do
       it 'compare words дом with Дом and return text message' do
         visit new_card_path
         within('form') do
-          fill_in 'Оригинальный текст', with: 'дом'
-          fill_in 'Перевод текста', with: 'Дом'
+          fill_in 'Original word', with: 'дом'
+          fill_in 'Translated word', with: 'Дом'
         end
         click_button 'Create'
         expect(page).to have_content('Original text can\'t be translated')
@@ -218,7 +219,7 @@ RSpec.describe 'Cards', type: :feature do
         within('form') do
           fill_in 'check[user_text]', with: 'home'
         end
-        click_button 'Save Check'
+        click_button 'Check'
         expect(page).to have_content "You have guessed the word!"
       end
 
@@ -226,7 +227,7 @@ RSpec.describe 'Cards', type: :feature do
         within('form') do
           fill_in 'check[user_text]', with: 'hom'
         end
-        click_button 'Save Check'
+        click_button 'Check'
         expect(page).to have_content "Original text: #{card.original_text}"
       end
 
@@ -234,7 +235,7 @@ RSpec.describe 'Cards', type: :feature do
         within('form') do
           fill_in 'check[user_text]', with: 'ho'
         end
-        click_button 'Save Check'
+        click_button 'Check'
         expect(page).to have_content "Original text: #{card.original_text}"
       end
     end
@@ -244,7 +245,7 @@ RSpec.describe 'Cards', type: :feature do
         within('form') do
           fill_in 'check[user_text]', with: 'RoR'
         end
-        click_button 'Save Check'
+        click_button 'Check'
         expect(page).to have_content 'Your word is not equal to the original'
       end
 
@@ -252,7 +253,7 @@ RSpec.describe 'Cards', type: :feature do
         within('form') do
           fill_in 'check[user_text]', with: ''
         end
-        click_button 'Save Check'
+        click_button 'Check'
         expect(page).to have_content 'Your word is not equal to the original'
       end
 
@@ -260,7 +261,7 @@ RSpec.describe 'Cards', type: :feature do
         within('form') do
           fill_in 'check[user_text]', with: 'rest'
         end
-        click_button 'Save Check'
+        click_button 'Check'
         card.reload
         expect(card.guessing).to equal(1)
       end
@@ -272,7 +273,7 @@ RSpec.describe 'Cards', type: :feature do
         within('form') do
           fill_in 'check[user_text]', with: 'reses'
         end
-        click_button 'Save Check'
+        click_button 'Check'
         card.reload
         expect(card.box).to equal(1)
       end
@@ -283,7 +284,7 @@ RSpec.describe 'Cards', type: :feature do
         within('form') do
           fill_in 'check[user_text]', with: 'reses'
         end
-        click_button 'Save Check'
+        click_button 'Check'
         card.reload
         expect(card.guessing).to equal(0)
       end

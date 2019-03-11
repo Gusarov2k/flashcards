@@ -1,0 +1,13 @@
+ru:
+  link:
+    log_out: 'Выйти'
+    show_user: 'Данные пользователя'
+    sign_up: 'Зарегестрироваться'
+    log_in: 'Войти'
+    login_github: 'Войти через github'
+    login_vk: 'Войти через vk'
+    all_cards: 'Все карточки'
+    add_card: 'Добавить карточку'
+    all_packs: 'Все коллоды'
+    add_pack: 'Добавить коллоду'
+  link_to_back: 'Назад'

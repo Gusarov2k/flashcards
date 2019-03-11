@@ -1,0 +1,10 @@
+en:
+  users:
+    new:
+    show:
+      label_user: 'User: '
+      link_edit: 'Edit'
+    edit:
+      header: 'Editing user'
+      link_show: 'Show'
+

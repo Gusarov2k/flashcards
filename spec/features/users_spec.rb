@@ -2,10 +2,11 @@ require 'rails_helper'
 
 RSpec.describe 'Cards', type: :feature do
   include LogInHelper
+
   describe 'when not authorization' do
     context 'when links' do
       it 'login in' do
-        visit log_in_path
+        visit log_in_path(locale: I18n.locale)
         expect(page).to have_content('Log In')
       end
 
@@ -26,12 +27,12 @@ RSpec.describe 'Cards', type: :feature do
 
     context 'when wrong' do
       before do
-        visit log_in_path
+        visit log_in_path(locale: :en)
       end
 
       it 'email incorrect' do
         within('form') do
-          fill_in 'Email', with: 'ivan@el.ru'
+          fill_in 'email', with: 'ivan@el.ru'
         end
         click_button 'Log In'
         expect(page).to have_content('E-mail and/or password is incorrect.')
@@ -39,7 +40,7 @@ RSpec.describe 'Cards', type: :feature do
 
       it 'password incorrect' do
         within('form') do
-          fill_in 'Password', with: '123qs'
+          fill_in 'password', with: '123qs'
         end
         click_button 'Log In'
         expect(page).to have_content('E-mail and/or password is incorrect.')
@@ -55,9 +56,9 @@ RSpec.describe 'Cards', type: :feature do
     it 'when successfully' do
       within('form') do
         fill_in 'Name', with: 'Jon'
-        fill_in 'email', with: 'jo@ya.ru'
-        fill_in 'password', with: '12345'
-        fill_in 'password_confirmation', with: '12345'
+        fill_in 'Email', with: 'jo@ya.ru'
+        fill_in 'Password', with: '12345'
+        fill_in 'Password confirmation', with: '12345'
       end
 
       click_button 'Register'
@@ -110,7 +111,7 @@ RSpec.describe 'Cards', type: :feature do
 
       it 'password_confirmation blank' do
         within('form') do
-          fill_in 'password', with: nil
+          fill_in 'Password', with: nil
         end
         click_button 'Register'
         expect(page).to have_content('Password confirmation can\'t be blank')
@@ -118,8 +119,8 @@ RSpec.describe 'Cards', type: :feature do
 
       it 'password not equal password_confirmation' do
         within('form') do
-          fill_in 'password', with: 12_345
-          fill_in 'password_confirmation', with: 1234
+          fill_in 'Password', with: 12_345
+          fill_in 'Password confirmation', with: 1234
         end
         click_button 'Register'
         expect(page).to have_content('Password confirmation doesn\'t match Password')
@@ -136,7 +137,7 @@ RSpec.describe 'Cards', type: :feature do
 
     context 'when successful' do
       it 'update name and return text message' do
-        visit edit_user_path(user)
+        visit edit_user_path(user, locale: I18n.locale)
         within('form') do
           fill_in 'Name', with: 'ivan2'
         end
@@ -145,9 +146,9 @@ RSpec.describe 'Cards', type: :feature do
       end
 
       it 'update email and return text message' do
-        visit edit_user_path(user)
+        visit edit_user_path(user, locale: I18n.locale)
         within('form') do
-          fill_in 'email', with: 'ivan@mail.ru'
+          fill_in 'Email', with: 'ivan@mail.ru'
         end
         click_button 'Register'
         expect(page).to have_content('User was successfully updated.')
@@ -156,7 +157,7 @@ RSpec.describe 'Cards', type: :feature do
 
     context 'when false' do
       it 'name is blank' do
-        visit edit_user_path(user)
+        visit edit_user_path(user, locale: I18n.locale)
         within('form') do
           fill_in 'Name', with: ''
         end

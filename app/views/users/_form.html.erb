@@ -1,9 +1,8 @@
 <%= simple_form_for(@user, html: { class: 'form-group' }) do |f| %>
   <%= f.error_notification %>
-  <%= f.input :name, label: 'Name' %>
-  <%= f.input :email, label: 'email' %>
-  <%= f.input :password, label: 'password' %>
-  <%= f.input :password_confirmation, label: 'password_confirmation' %>
-  <%= f.button :submit, "Register", class: "btn-primary" %>
-  <%= f.button :button, "Clear", type: "reset", class: "btn-outline-secondary" %>
+  <%= f.input :name %>
+  <%= f.input :email %>
+  <%= f.input :password %>
+  <%= f.input :password_confirmation %>
+  <%= f.button :submit, t('simple_form.user.common.register', action: @user.new_record? ? 'Создать' : 'Изменить'), class: "btn-primary" %>
 <% end %>

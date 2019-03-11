@@ -1,24 +1,30 @@
 ﻿<header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-  <h1 class="my-0 mr-md-auto font-weight-normal">Флэшкарточкер</h1>
+  <h1 class="my-0 mr-md-auto font-weight-normal"><%= t('global.main_header') %></h1>
   <div class="my-2 my-md-0 mr-md-3">
-    <%= link_to "All packs", packs_path, class: "p-2 text-dark" %>
-    <%= link_to "Create pack", new_pack_path, class: "p-2 text-dark" %>
-    <%= link_to "Все карточки", cards_path, class: "p-2 text-dark" %>
-    <%= link_to "Добавить карточку", new_card_path, class: "p-2 text-dark"  %>
+    <%= link_to t('link.all_packs'), packs_path, class: "p-2 text-dark" %>
+    <%= link_to t('link.add_pack'), new_pack_path, class: "p-2 text-dark" %>
+    <%= link_to t('link.all_cards'), cards_path, class: "p-2 text-dark" %>
+    <%= link_to t('link.add_card'), new_card_path, class: "p-2 text-dark"  %>
   </div>
   <div id="navbar">
   <ul class="nav navbar-nav">
     <% if current_user %>
       <ul class="nav navbar-nav pull-right">
         <li><span><%= current_user.name %></span></li>
-        <li><%= link_to 'Log Out', log_out_path, method: :delete %></li>
+
+        <li><%= link_to t('link.log_out'), log_out_path, method: :delete %></li>
       </ul>
-      <li><%= link_to 'Show user', user_path(current_user) %></li>
+      <li><%= link_to t('link.show_user'), user_path(current_user) %></li>
     <% else %>
-      <li><%= link_to 'Sign Up', sign_up_path %></li>
-      <li><%= link_to 'Log In', log_in_path %></li>
-      <li><%= link_to 'Login github', auth_at_provider_path(provider: :github) %></li>
-      <li><%= link_to 'Login vk', auth_at_provider_path(provider: :vk) %></li>
+      <% if I18n.locale == I18n.default_locale %>
+        <li><%= link_to "Russian", { locale: 'ru' } %></li>
+      <% else %>
+        <li><%= link_to "English", { locale: 'en' } %></li>
+      <% end %>
+      <li><%= link_to t('link.sign_up'), sign_up_path %></li>
+      <li><%= link_to t('link.log_in'), log_in_path %></li>
+      <li><%= link_to t('link.login_github'), auth_at_provider_path(provider: :github) %></li>
+      <li><%= link_to t('link.login_vk'), auth_at_provider_path(provider: :vk) %></li>
     <% end %>
   </ul>
   <div>

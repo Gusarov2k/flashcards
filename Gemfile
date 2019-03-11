@@ -35,6 +35,7 @@ gem 'sorcery'
 
 gem 'carrierwave', '>= 1.0.0.beta'
 gem 'fog-aws'
+gem 'http_accept_language'
 gem 'mini_magick'
 gem 'text', '>= 1.3.1'
 gem 'whenever', require: false

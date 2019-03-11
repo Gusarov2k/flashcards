@@ -1,0 +1,13 @@
+ru:
+  cards:
+    edit:
+      header: 'Редактировать карточку'
+      link_show: 'Показать'
+    index:
+      col_orig_text: 'Оригинальный текст'
+      col_transl_text: 'Перевод'
+      col_date: 'Дата обзора'
+      col_edit: 'Редактировать'
+      col_delete: 'Удалить'
+      link_edit: 'Редактировать карточку'
+      link_delete: 'Удалить карточку'

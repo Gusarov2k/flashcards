@@ -1,0 +1,13 @@
+en:
+  cards:
+    edit:
+      header_r: 'Editing Card'
+      link_show: 'Show'
+    index:
+      col_orig_text: 'Original word'
+      col_transl_text: 'Translate word'
+      col_date: 'Date review'
+      col_edit: 'Edit to:'
+      col_delete: 'Delete to:'
+      link_edit: 'Edit'
+      link_delete: 'Delete'

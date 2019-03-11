@@ -18,7 +18,6 @@ RSpec.describe 'Packs', type: :feature do
         within('form') do
           fill_in 'Name for pack', with: 'second'
         end
-
         click_button 'Create'
         expect(page).to have_content('name' && 'second')
       end
@@ -39,7 +38,7 @@ RSpec.describe 'Packs', type: :feature do
     let(:pack) { create(:pack) }
 
     before do
-      visit edit_pack_path(pack)
+      visit edit_pack_path(pack, locale: I18n.locale)
     end
 
     context 'when true' do
@@ -67,11 +66,11 @@ RSpec.describe 'Packs', type: :feature do
     let!(:pack) { create(:pack, user_id: user.id) }
 
     before do
-      visit packs_path(pack)
+      visit packs_path(pack, locale: I18n.locale)
     end
 
     it 'delete pack' do
-      expect { click_link 'Delete', href: "/packs/#{pack.id}" }.to change(Pack, :count).by(-1)
+      expect { click_link 'Delete', href: "/#{I18n.locale}/packs/#{pack.id}" }.to change(Pack, :count).by(-1)
     end
   end
 
@@ -79,11 +78,11 @@ RSpec.describe 'Packs', type: :feature do
     let!(:pack) { create(:pack, user_id: user.id) }
 
     before do
-      visit packs_path
+      visit packs_path(locale: I18n.locale)
     end
 
     it 'select the current pack' do
-      click_link 'current', href: "/packs/#{pack.id}/current"
+      click_link 'Set current', href: "/#{I18n.locale}/packs/#{pack.id}/current"
       expect(User.last.current_pack_id).to eq(pack.id)
     end
   end
