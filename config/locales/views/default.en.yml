@@ -1,0 +1,13 @@
+en:
+  link:
+    log_out: 'Log Out'
+    show_user: 'Show user'
+    sign_up: 'Sign Up'
+    log_in: 'Log In'
+    login_github: 'Login github'
+    login_vk: 'Login vk'
+    all_cards: 'All cards'
+    add_card: 'Add card'
+    all_packs: 'All packs'
+    add_pack: 'Add pack'
+  link_to_back: 'Back'

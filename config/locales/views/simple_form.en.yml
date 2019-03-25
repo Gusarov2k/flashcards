@@ -1,0 +1,35 @@
+en:
+  simple_form:
+    "yes": 'Yes'
+    "no": 'No'
+    required:
+      text: 'required'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: "Please review the problems below:"
+    pack:
+      common:
+        cr_pack: 'Create'
+    card:
+      common:
+        cr_card: 'Create'
+    check:
+      common:
+        check_b: 'Check'
+    user:
+      common:
+        register: 'Register'
+    labels:
+      pack:
+        name: 'Name for pack'
+      card:
+        original_text: 'Original word'
+        translated_text: 'Translated word'
+        image: 'Select image'
+        remote_image_url: 'Image from url'
+      check:
+        user_text: 'Your option original'
+        trans_opt: 'Translate option'

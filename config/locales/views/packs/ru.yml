@@ -1,0 +1,15 @@
+ru:
+  packs:
+    index:
+      col_name: 'Имя'
+      col_current: 'Текущая'
+      col_edit: 'Редактировать'
+      col_delete: 'Удалить'
+      link_current: 'Сделать текущей'
+      link_edit: 'Редактировать коллоду'
+      link_delete: 'Удалить коллоду'
+    new:
+      header: 'Создать коллоду'
+    edit:
+      header_e: 'Редактировать коллоду'
+      link_show: 'Показать'

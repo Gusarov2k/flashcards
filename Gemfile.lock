@@ -69,7 +69,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.1.4)
+    concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
@@ -112,11 +112,12 @@ GEM
       fog-core
       nokogiri (>= 1.5.11, < 2.0.0)
     formatador (0.2.5)
-    globalid (0.4.1)
+    globalid (0.4.2)
       activesupport (>= 4.2.0)
     hashdiff (0.3.8)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
+    http_accept_language (2.1.1)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
     ipaddress (0.8.3)
@@ -339,6 +340,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   fog-aws
+  http_accept_language
   jbuilder (~> 2.0)
   jquery-rails
   launchy

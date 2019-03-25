@@ -1,0 +1,16 @@
+en:
+  packs:
+    index:
+      col_name: 'Name'
+      col_current: 'Current'
+      col_edit: 'Edit'
+      col_delete: 'Delete'
+      link_current: 'Set current'
+      link_edit: 'Edit'
+      link_delete: 'Delete'
+    new:
+      header: 'Create pack'
+    edit:
+      header_e: 'Editing Pack'
+      link_show: 'Show'
+

@@ -1,5 +1,5 @@
-<h1>Editing Card</h1>
+<h1><%= t('.header') %></h1>
 <%= render 'form' %>
 
-<%= link_to 'Показать', @card %>
-<%= link_to 'Назад', cards_path %>
+<%= link_to t('.link_show'), @card %>
+<%= link_to t('link_to_back'), cards_path %>

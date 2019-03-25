@@ -1,5 +1,5 @@
-<h1>Editing Pack</h1>
+<h1><%= t('.header_e') %></h1>
 <%= render 'form' %>
 
-<%= link_to 'Показать', @pack %>
-<%= link_to 'Назад', packs_path %>
+<%= link_to t('.link_show'), @pack %>
+<%= link_to t('link_to_back'), packs_path %>

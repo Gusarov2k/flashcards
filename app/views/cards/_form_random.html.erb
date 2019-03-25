@@ -1,9 +1,9 @@
 <%= simple_form_for(:check, method: :patch,  url: word_comparison_card_path(@card), html: { class: 'form-group' }) do |f| %>
   <%= f.error_notification %>
   <%= image_tag @card.image if @card.image? %>
-  <%= f.label 'Переведненный вариант' %> <br>
+  <%= f.label t('simple_form.labels.check.trans_opt') %> <br>
   <b> <%= f.label "#{@card.translated_text}" %> </b>
-  <%= f.input :user_text, label: 'Ваш вариант оригинала' %>
-  <%= f.button :button, class: "btn-primary" %>
+  <%= f.input :user_text %>
+  <%= f.button :button, t('simple_form.check.common.check_b') ,class: "btn-primary" %>
 <% end %>
 

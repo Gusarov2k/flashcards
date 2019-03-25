@@ -2,11 +2,11 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">Оригинальный текст</th>
-        <th scope="col">Перевод</th>
-        <th scope="col">Дата обзора</th>
-        <th scope="col">Редактировать</th>
-        <th scope="col">Удалить</th>
+        <th scope="col"><%= t('.col_orig_text') %></th>
+        <th scope="col"><%= t('.col_transl_text') %></th>
+        <th scope="col"><%= t('.col_date') %></th>
+        <th scope="col"><%= t('.col_edit') %></th>
+        <th scope="col"><%= t('.col_delete') %></th>
       </tr>
     </thead>
     <tbody>
@@ -15,8 +15,8 @@
           <td><%= c.original_text %></td>
           <td><%= c.translated_text %></td>
           <td><%= c.review_date.to_formatted_s(:rfc822) %></td>
-          <td><%= link_to 'Edit', edit_card_path(c) %></td>
-          <td><%= link_to 'Delete', card_path(c), method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to t('.link_edit'), edit_card_path(c) %></td>
+          <td><%= link_to t('.link_delete'), card_path(c), method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     </tbody>

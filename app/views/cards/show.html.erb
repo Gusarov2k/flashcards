@@ -15,7 +15,7 @@
           <td><%= @card.translated_text %></td>
           <td><%= @card.review_date.to_formatted_s(:rfc822) %></td>
           <td><%= link_to 'Edit', edit_card_path %></td>
-          <td><%= link_to 'Back', cards_path %></td>
+          <td><%= link_to t('link_to_back'), cards_path %></td>
         </tr>
     </tbody>
   </table>

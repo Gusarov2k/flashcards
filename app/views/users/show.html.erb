@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>User:</b>
+  <b><%= t('.label_user') %></b>
   <%= @user.email %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', root_path %>
+<%= link_to t('.link_edit'), edit_user_path(@user) %> |
+<%= link_to t('link_to_back'), root_path %>
